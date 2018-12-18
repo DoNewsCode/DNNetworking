@@ -7,6 +7,7 @@ s.license      = 'MIT'
 s.authors      = {'MrJKzzz' => '372871577@qq.com'}
 s.platform     = :ios, '8.0'
 s.source       = {:git => 'https://github.com/DoNewsCode/DNNetworking.git', :tag => s.version}
-s.source_files = 'DNNetworking/**/*'
-s.dependency: 'AFNetworking','YYModel'
+s.source_files = 'DNNetworking/**/*.{h,m}'
+s.dependency "AFNetworking"
+s.dependency "YYModel"
 end

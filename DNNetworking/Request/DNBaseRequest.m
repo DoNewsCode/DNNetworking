@@ -8,7 +8,7 @@
 
 #import "DNBaseRequest.h"
 #import <objc/message.h>
-#import <YYModel.h>
+#import "YYModel.h"
 #import "DNApiConfig.h"
 #import "DNNetworkManager.h"
 #import "DNResponse.h"

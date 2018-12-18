@@ -7,7 +7,7 @@
 //
 
 #import "DNResponse.h"
-#import <YYModel.h>
+#import "YYModel.h"
 
 #define SUCCESS_CODE @200
 #define SUCCESS_RESPONSE_CODE @1000
