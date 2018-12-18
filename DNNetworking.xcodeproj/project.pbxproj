@@ -20,6 +20,7 @@
 		A53BA75421C9049A00175D5F /* DNResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A53BA74721C9049A00175D5F /* DNResponse.m */; };
 		A53BA75521C9049A00175D5F /* DNHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A53BA74921C9049A00175D5F /* DNHttpClient.m */; };
 		A53BA75621C9049A00175D5F /* DNHttpClient.h in Headers */ = {isa = PBXBuildFile; fileRef = A53BA74A21C9049A00175D5F /* DNHttpClient.h */; };
+		A53BA75821C908CD00175D5F /* DNNetworking.podspec in Resources */ = {isa = PBXBuildFile; fileRef = A53BA75721C908CD00175D5F /* DNNetworking.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		A53BA74721C9049A00175D5F /* DNResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNResponse.m; sourceTree = "<group>"; };
 		A53BA74921C9049A00175D5F /* DNHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNHttpClient.m; sourceTree = "<group>"; };
 		A53BA74A21C9049A00175D5F /* DNHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNHttpClient.h; sourceTree = "<group>"; };
+		A53BA75721C908CD00175D5F /* DNNetworking.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DNNetworking.podspec; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				A53BA74521C9049A00175D5F /* Response */,
 				A53BA73121C9040C00175D5F /* DNNetworking.h */,
 				A53BA73221C9040C00175D5F /* Info.plist */,
+				A53BA75721C908CD00175D5F /* DNNetworking.podspec */,
 			);
 			path = DNNetworking;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A53BA75821C908CD00175D5F /* DNNetworking.podspec in Resources */,
 				A53BA75021C9049A00175D5F /* DNApiConfig.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,9 +8,6 @@
 
 #import "DNNetworkManager.h"
 #import <pthread/pthread.h>
-#import <YYModel.h>
-#import <objc/message.h>
-
 #import "DNHttpClient.h"
 #import "DNApiConfig.h"
 #import "DNResponse.h"
