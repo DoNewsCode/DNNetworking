@@ -1,0 +1,90 @@
+//
+//  DNBaseRequest.m
+//  Gravity
+//
+//  Created by Ming on 2018/9/4.
+//  Copyright © 2018 DoNews. All rights reserved.
+//
+
+#import "DNBaseRequest.h"
+#import <objc/message.h>
+#import <YYModel.h>
+#import "DNApiConfig.h"
+#import "DNNetworkManager.h"
+#import "DNResponse.h"
+
+@interface DNBaseRequest()
+
+@property (copy, nonatomic) NSString *app_id;
+
+@end
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wprotocol"
+@implementation DNBaseRequest
+#pragma clang diagnostic pop
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+
+///  Convenience method to start the request with block callbacks.
+- (void)startWithSuccess:(nullable DNRequestSuccessBlock)success
+                 failure:(nullable DNRequestFailureBlock)failure{
+    
+    NSAssert([self respondsToSelector:@selector(requestUrl)], @"requestUrl is nil");
+    NSAssert([self requestUrl], @"requestUrl is nil");
+    NSAssert([self requestUrl].length, @"requestUrl is nil");
+    
+    if (self.inTheRequest) {
+        return;
+    }
+    
+    self.successCompletionBlock = success;
+    
+    self.failureCompletionBlock = failure;
+    
+    self.completeUrl = DNAPI(self.requestUrl);
+    
+    self.inTheRequest = YES;
+    
+    [[DNNetworkManager sharedManager] addRequest:self];
+}
+
+- (void)stop{
+    [[DNNetworkManager sharedManager] cancelRequest:self];
+}
+
+- (void)requestSuccess:(id)responseObject{
+    self.inTheRequest = NO;
+    DNResponse *response = [DNResponse responseWithResponseObject:responseObject];
+    self.successCompletionBlock(response);
+    [self clearCompletionBlock];
+}
+
+- (void)requestFailed:(NSError *)error{
+    self.inTheRequest = NO;
+    [[DNApiConfig sharedInstance] registFailedPath:self.requestUrl];
+    self.failureCompletionBlock(error);
+    [self clearCompletionBlock];
+}
+
+- (void)clearCompletionBlock{
+    self.successCompletionBlock = nil;
+    self.failureCompletionBlock = nil;
+}
+
++ (nullable NSArray<NSString *> *)modelPropertyBlacklist {
+    return @[@"requestMethod",@"requestUrl",@"inTheRequest",@"completeUrl",@"successCompletionBlock",@"failureCompletionBlock"];
+}
+
+- (NSDictionary *)parametersDictionary {
+    return [self yy_modelToJSONObject];
+}
+
+@end
