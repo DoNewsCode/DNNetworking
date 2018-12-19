@@ -7,6 +7,13 @@
 
 #import <Foundation/Foundation.h>
 #import "DNNetworkingConfig.h"
+#import "DNApiConfig.h"
+
+@interface DNNetworkingConfig()
+
+@property (nonatomic, strong) DNApiConfig *apiConfig;
+
+@end
 
 @interface DNNetworkingConfig (apiConfig)
 

@@ -9,13 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class DNApiConfig;
-
 @interface DNNetworkingConfig : NSObject
 
 + (instancetype)sharedConfig;
-
-@property (nonatomic, strong) DNApiConfig *apiConfig;
 /**
  API配置相关
  */
