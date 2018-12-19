@@ -57,4 +57,16 @@ typedef void (^DNHttpProgress)(NSProgress *progress);
 /** 网络状态的Block*/
 typedef void(^DNNetworkStatus)(DNNetworkStatusType status);
 
+//Api环境
+typedef NS_ENUM(NSInteger, DNApiConfigType) {
+    DNApiConfigTypeTest,  //测试环境
+    DNApiConfigTypeNormal,  //正式环境
+    DNApiConfigTypeSpares, //备用环境
+};
+
+//Api环境切换方式
+typedef NS_ENUM(NSInteger, DNApiConfigSwitchMode) {
+    DNApiConfigSwitchModeAuto,   //自动切换
+    DNApiConfigSwitchModeManual  //手动切换
+};
 #endif /* DNNetworkingMacro_h */

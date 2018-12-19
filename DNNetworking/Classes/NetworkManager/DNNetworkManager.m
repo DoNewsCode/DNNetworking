@@ -9,7 +9,7 @@
 #import "DNNetworkManager.h"
 #import <pthread/pthread.h>
 #import "DNHttpClient.h"
-#import "DNApiConfig.h"
+#import "DNNetworkingConfig.h"
 #import "DNResponse.h"
 
 #define Lock() pthread_mutex_lock(&_lock)
@@ -50,13 +50,19 @@
     if ([self containRequest:request]) {
         return;
     }
-    [DNHttpClient sendRequestWithURLString:request.completeUrl
-                                parameters:request.parametersDictionary method:request.requestMethod
+    NSString *completeUrl = request.completeUrl;
+    NSDictionary *parameters = request.parametersDictionary;
+    DNHttpRequestMethod method = request.requestMethod;
+    
+    [DNHttpClient sendRequestWithURLString:completeUrl
+                                parameters:parameters
+                                    method:method
                                    success:^(id responseObject) {
                                        [self removeRequestFromRecord:request];
                                        [request requestSuccess:responseObject];
     } failed:^(NSError *error) {
         [self removeRequestFromRecord:request];
+        [[DNNetworkingConfig sharedConfig] registFailedPath:request.requestUrl];
         [request requestFailed:error];
     }];
 }

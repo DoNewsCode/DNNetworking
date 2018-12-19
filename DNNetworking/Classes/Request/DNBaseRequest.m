@@ -49,7 +49,7 @@
     
     self.failureCompletionBlock = failure;
     
-    self.completeUrl = DNAPI(self.requestUrl);
+//    self.completeUrl = DNAPI(self.requestUrl);
     
     self.inTheRequest = YES;
     
@@ -69,7 +69,6 @@
 
 - (void)requestFailed:(NSError *)error{
     self.inTheRequest = NO;
-    [[DNApiConfig sharedInstance] registFailedPath:self.requestUrl];
     self.failureCompletionBlock(error);
     [self clearCompletionBlock];
 }

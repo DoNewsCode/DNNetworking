@@ -27,17 +27,6 @@
 #pragma mark - Override Methods
 
 #pragma mark - Intial Methods
-//单例对象
-static DNApiConfig *_instance = nil;
-//单例
-+ (instancetype)sharedInstance
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _instance = [[self alloc] init];
-    });
-    return _instance;
-}
 
 - (instancetype)init
 {
@@ -92,8 +81,8 @@ static DNApiConfig *_instance = nil;
 #pragma mark - Private Methods
 - (NSString *)getCurrentHost:(DNApiConfigType)type{
     NSString *returnHost;
-    if (DNApiConfigCurrentSwitchMode == DNApiConfigSwitchModeManual) {
-        type = DNApiManualConfigType;
+    if (self.switchMode == DNApiConfigSwitchModeManual) {
+        type = self.manualConfigType;
     }
     switch (type) {
         case DNApiConfigTypeTest:

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "DNNetworkingMacro.h"
+
+#import <UIKit/UIKit.h>
+
 //! Project version number for DNNetworking.
 FOUNDATION_EXPORT double DNNetworkingVersionNumber;
 

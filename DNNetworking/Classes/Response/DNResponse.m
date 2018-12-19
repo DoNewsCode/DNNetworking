@@ -8,10 +8,7 @@
 
 #import "DNResponse.h"
 #import "YYModel.h"
-
-#define SUCCESS_CODE @200
-#define SUCCESS_RESPONSE_CODE @1000
-#define APP_LOGIN_EXPIRED_CODE @(410)
+#import "DNNetworkingConfig.h"
 
 @interface DNResponse()
 @property(nonatomic, copy, readwrite) NSNumber *code;//响应码
@@ -42,11 +39,11 @@
     _responseObject=responseObject;
 
     @try {
-        self.code = self.responseObject[@"code"];
-        self.rspcode=self.responseObject[@"rspcode"];
-        self.errormsg=self.responseObject[@"errormsg"];
-        self.msg = self.responseObject[@"msg"];
-        self.data=self.responseObject[@"data"];
+        self.code = self.responseObject[[DNNetworkingConfig sharedConfig].responseCodeKey];
+        self.rspcode=self.responseObject[[DNNetworkingConfig sharedConfig].responseCodeKey];
+        self.errormsg=self.responseObject[[DNNetworkingConfig sharedConfig].responseMsgKey];
+        self.msg = self.responseObject[[DNNetworkingConfig sharedConfig].responseMsgKey];
+        self.data=self.responseObject[[DNNetworkingConfig sharedConfig].responseDataKey];
     } @catch (NSException *exception) {
         self.rspcode = @(1001);
         self.errormsg = @"处理数据失败";
@@ -57,37 +54,16 @@
 
 }
 
-//-(void)setDownloadResponseObject:(id)responseObject{
-//
-//    _responseObject=responseObject;
-//    NSHTTPURLResponse *httpResponse = responseObject;
-//    @try {
-//        self.rspcode=[NSString stringWithFormat:@"%ld",httpResponse.statusCode];
-//        NSString *timeStr = httpResponse.allHeaderFields[@"Date"];
-//        NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
-//        fmt.dateFormat = @"EEE, dd MMM yyyy HH:mm:ss ZZZ";
-//        // fmt.dateFormat = @"EEE MMM dd HH:mm:ss ZZZZ yyyy";
-//        // 设置语言区域(因为这种时间是欧美常用时间)
-//        fmt.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-//        NSDate *date = [fmt dateFromString:timeStr];
-//        NSTimeInterval timestamp = [date timeIntervalSince1970];
-//        self.timestamp =  [NSString stringWithFormat:@"%f",timestamp];
-//    } @catch (NSException *exception) {
-//        self.rspcode = @800001;
-//        self.errormsg = @"处理数据失败";
-//        self.data = @{};
-//    } @finally {
-//    }
-//
-//}
-
 +(id)responseWithResponseObject:(id)responseObject{
 
     DNResponse *response=[[DNResponse alloc] init];
   
     response.responseObject = responseObject;
 
-    BOOL isSuccess = [response.code isEqualToNumber:SUCCESS_CODE] || [response.rspcode isEqualToNumber:SUCCESS_RESPONSE_CODE];
+    BOOL isSuccess =
+    [response.code isEqualToNumber:[DNNetworkingConfig sharedConfig].responseSuccessCode] ||
+    [response.rspcode isEqualToNumber:[DNNetworkingConfig sharedConfig].responseSuccessCode];
+    
     response.failed = !isSuccess;
 
     return response;
@@ -99,9 +75,11 @@
 
 - (void)setCode:(NSNumber *)code{
     _code = code;
-//    if ([code isEqualToNumber:APP_LOGIN_EXPIRED_CODE]) {
-//        [DNAppLogin loginExpired];
-//    }
+    if ([code isEqualToNumber:[DNNetworkingConfig sharedConfig].responseExpiredode]) {
+        if ([DNNetworkingConfig sharedConfig].expiredBlock) {
+            [DNNetworkingConfig sharedConfig].expiredBlock();
+        }
+    }
 }
 
 -(NSArray *)getListWithClass:(Class)clazz{

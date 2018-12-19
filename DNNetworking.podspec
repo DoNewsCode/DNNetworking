@@ -41,4 +41,5 @@ TODO: Add long description of the pod here.
   # s.dependency 'AFNetworking', '~> 2.3'
   s.dependency 'AFNetworking'
   s.dependency 'YYModel','1.0.4'
+  s.frameworks = 'Foundation'
 end
