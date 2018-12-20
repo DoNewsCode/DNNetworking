@@ -8,18 +8,15 @@
 
 #import "DNApiConfig.h"
 
-#define DNApiConfigVersions @"DNApiConfigVersions"
-#define kVersionPath        @"DNAPIConfigVersionPath"
+//#define DNApiConfigVersions @"DNApiConfigVersions"
+//#define kVersionPath        @"DNAPIConfigVersionPath"
+//
+//#define DNApiConfigHosts    @"DNApiConfigHosts"
+//#define kNormalHost         @"DNApiConfigTypeNormalHost"//线上地址（勿动）
+//#define kSparesHost         @"DNApiConfigTypeSparesHost"//备用地址
+//#define kTestHost           @"DNApiConfigTypeTestHost"//测试地址
 
-#define DNApiConfigHosts    @"DNApiConfigHosts"
-#define kNormalHost         @"DNApiConfigTypeNormalHost"//线上地址（勿动）
-#define kSparesHost         @"DNApiConfigTypeSparesHost"//备用地址
-#define kTestHost           @"DNApiConfigTypeTestHost"//测试地址
-
-@interface DNApiConfig (){
-    NSDictionary *_hostsDict;
-    NSString *_versionPath;
-}
+@interface DNApiConfig ()
 @property (nonatomic ,strong) NSMutableSet *failedSet;
 @end
 
@@ -32,27 +29,11 @@
 {
     self = [super init];
     if (self) {
-        NSDictionary *dict = [self readApiConfigFile];
-        _hostsDict = dict[DNApiConfigHosts];
-        NSDictionary *versDict = dict[DNApiConfigVersions];
-        _versionPath = versDict[kVersionPath];
+        
     }
     return self;
 }
 #pragma mark - Public Methods
-
-- (void)resetVersionPath:(NSString *)versionPath{
-    if (!versionPath.length) {
-        return;
-    }
-    if ([versionPath hasPrefix:@"/"]) {
-        versionPath = [NSString stringWithFormat:@"/%@",versionPath];
-    }
-    if ([versionPath hasSuffix:@"/"]) {
-        versionPath = [versionPath substringWithRange:NSMakeRange(0, versionPath.length-1)];
-    }
-    _versionPath = [versionPath copy];
-}
 
 - (NSString *)getCurrentApi:(NSString *)url{
     if ([self isAbsoluteAddress:url]) return url;
@@ -85,14 +66,20 @@
         type = self.manualConfigType;
     }
     switch (type) {
-        case DNApiConfigTypeTest:
-            returnHost = _hostsDict[kTestHost];  break;
-        case DNApiConfigTypeNormal:
-            returnHost = _hostsDict[kNormalHost];break;
-        case DNApiConfigTypeSpares:
-            returnHost = _hostsDict[kSparesHost];break;
+        case DNApiConfigTypeTest:{
+            returnHost = _apiTestHost;
+        }break;
+        case DNApiConfigTypeNormal:{
+            returnHost = _apiNormalHost;
+            if (!returnHost) {returnHost = _apiSparesHost;}
+        }break;
+        case DNApiConfigTypeSpares:{
+            returnHost = _apiSparesHost;
+            if (!returnHost) {returnHost = _apiNormalHost;}
+        }break;
         default:break;
     }
+    NSAssert(returnHost.length, @"the HOST is empty!!!");
     return returnHost;
 }
 
@@ -104,18 +91,41 @@
     return testUrl && testUrl.host;
 }
 
-// 读取本地JSON文件
-- (NSDictionary *)readApiConfigFile{
-    // 获取文件路径
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"DNApiConfig" ofType:@"json"];
-    // 将文件数据化
-    NSData *data = [[NSData alloc] initWithContentsOfFile:path];
-    // 对数据进行JSON格式化并返回字典形式
-    return [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-}
-
 #pragma mark - Setter
 
+- (void)setApiTestHost:(NSString *)apiTestHost{
+    while ([apiTestHost hasSuffix:@"/"]) {
+        apiTestHost = [apiTestHost substringToIndex:apiTestHost.length-1];
+    }
+    _apiSparesHost = [apiTestHost copy];
+}
+
+- (void)setApiNormalHost:(NSString *)apiNormalHost{
+    while ([apiNormalHost hasSuffix:@"/"]) {
+        apiNormalHost = [apiNormalHost substringToIndex:apiNormalHost.length-1];
+    }
+    _apiNormalHost = [apiNormalHost copy];
+}
+
+- (void)setApiSparesHost:(NSString *)apiSparesHost{
+    while ([apiSparesHost hasSuffix:@"/"]) {
+        apiSparesHost = [apiSparesHost substringToIndex:apiSparesHost.length-1];
+    }
+    _apiSparesHost = [apiSparesHost copy];
+}
+
+- (void)setVersionPath:(NSString *)versionPath{
+    if (!versionPath.length) {
+        return;
+    }
+    if (![versionPath hasPrefix:@"/"]) {
+        versionPath = [NSString stringWithFormat:@"/%@",versionPath];
+    }
+    while ([versionPath hasSuffix:@"/"]) {
+        versionPath = [versionPath substringToIndex:versionPath.length-1];
+    }
+    _versionPath = [versionPath copy];
+}
 #pragma mark - Getter
 
 - (NSMutableSet *)failedSet{

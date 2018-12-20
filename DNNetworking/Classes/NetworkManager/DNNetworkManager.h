@@ -31,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
  设置请求头
  */
 - (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
+/**
+ 请求头字典
+ */
+- (NSDictionary *)HTTPRequestHeaders;
 @end
 
 NS_ASSUME_NONNULL_END

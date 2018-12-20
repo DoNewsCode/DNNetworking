@@ -6,37 +6,83 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "DNNetworkingMacro.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DNNetworkingConfig : NSObject
 
 + (instancetype)sharedConfig;
+
+#pragma mark - api配置相关项
+
 /**
- API配置相关
+ app服务器地址
  */
-@property (nonatomic, copy, readonly) NSString *apiNormalHost;
+@property (nonatomic, copy)  NSString * _Nullable apiNormalHost;
 
-@property (nonatomic, copy, readonly) NSString *apiSparesHost;
-
-@property (nonatomic, copy, readonly) NSString *apiTestHost;
-
-@property (nonatomic, copy, readonly) NSString *apiVersionPath;
-
-- (void)registFailedPath:(NSString *)url;
 /**
- response配置相关，配置responseKey
+ 备用服务器地址，接口请求失败时，下次调用时启动
  */
-@property (nonatomic, copy, readonly) NSString *responseDataKey;
+@property (nonatomic, copy)  NSString * _Nullable apiSparesHost;
 
-@property (nonatomic, copy, readonly) NSString *responseCodeKey;
+/**
+ 测试用服务器地址
+ */
+@property (nonatomic, copy)  NSString * _Nullable apiTestHost;
 
-@property (nonatomic, copy, readonly) NSString *responseMsgKey;
+/**
+ 版本path，可空
+ */
+@property (nonatomic, copy)  NSString * _Nullable apiVersionPath;
 
-@property (nonatomic, strong, readonly) NSNumber *responseSuccessCode;
+/**
+ 切换模式，默认为自动切换
+ 自动模式：启用normalHost与sparesHost，失败时Host切换
+ 手动模式：固定使用manualConfigType
+ */
+@property (nonatomic, assign) DNApiConfigSwitchMode switchMode;
 
-@property (nonatomic, strong, readonly) NSNumber *responseExpiredode;
+/**
+ 手动模式固定host
+ switchMode为1时，所有api调用为此host
+ */
+@property (nonatomic, assign) DNApiConfigType manualConfigType;
 
-@property (nonatomic, copy, readonly) dispatch_block_t expiredBlock;
+
+#pragma mark - request配置相关项
+/**
+ request配置相关项
+ */
+@property (nonatomic, copy) NSDictionary *headerDictionary;
+/**
+ 设置请求头
+ */
+- (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
+
+#pragma mark - response配置相关项
+/**
+ response解析，data字段名
+ */
+@property (nonatomic, copy) NSString *responseDataKey;
+/**
+ response解析，code字段名
+ */
+@property (nonatomic, copy) NSString *responseCodeKey;
+/**
+ response解析，msg字段名
+ */
+@property (nonatomic, copy) NSString *responseMsgKey;
+/**
+ response解析，请求成功码
+ */
+@property (nonatomic, strong) NSNumber *responseSuccessCode;
+/**
+ response解析，异地登录错误码
+ */
+@property (nonatomic, strong) NSNumber *responseExpiredode;
+/**
+ response解析，异地登录错误回调
+ */
+@property (nonatomic, copy) dispatch_block_t expiredBlock;
 @end
 NS_ASSUME_NONNULL_END

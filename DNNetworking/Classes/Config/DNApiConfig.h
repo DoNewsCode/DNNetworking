@@ -8,8 +8,6 @@
 
 #import "DNNetworkingMacro.h"
 
-//#define DNAPI(urlString) [[DNApiConfig sharedInstance] getCurrentApi:urlString]
-
 @interface DNApiConfig : NSObject
 
 @property (nonatomic, assign) DNApiConfigSwitchMode switchMode;

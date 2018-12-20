@@ -10,33 +10,7 @@
 #import "DNApiConfig.h"
 
 @interface DNNetworkingConfig()
-
+#define DNURL(urlstring) [[DNNetworkingConfig sharedConfig].apiConfig getCurrentApi:urlstring]
 @property (nonatomic, strong) DNApiConfig *apiConfig;
-
-@end
-
-@interface DNNetworkingConfig (apiConfig)
-
-@property (nonatomic, copy, readwrite) NSString *apiNormalHost;
-
-@property (nonatomic, copy, readwrite) NSString *apiSparesHost;
-
-@property (nonatomic, copy, readwrite) NSString *apiTestHost;
-
-@property (nonatomic, copy, readwrite) NSString *apiVersionPath;
-
-@end
-
-@interface DNNetworkingConfig (responseConfig)
-
-@property (nonatomic, copy, readwrite) NSString *responseDataKey;
-
-@property (nonatomic, copy, readwrite) NSString *responseCodeKey;
-
-@property (nonatomic, copy, readwrite) NSString *responseMsgKey;
-
-@property (nonatomic, copy, readwrite) NSNumber *responseSuccessCode;
-
-@property (nonatomic, copy, readwrite) NSNumber *responseExpiredode;
 
 @end

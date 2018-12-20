@@ -11,7 +11,7 @@
 #import "DNHttpClient.h"
 #import "DNNetworkingConfig.h"
 #import "DNResponse.h"
-
+#import "DNNetworkingPrivate.h"
 #define Lock() pthread_mutex_lock(&_lock)
 #define Unlock() pthread_mutex_unlock(&_lock)
 
@@ -50,9 +50,11 @@
     if ([self containRequest:request]) {
         return;
     }
-    NSString *completeUrl = request.completeUrl;
+    NSString *completeUrl = DNURL(request.requestUrl);
     NSDictionary *parameters = request.parametersDictionary;
     DNHttpRequestMethod method = request.requestMethod;
+    
+    request.completeUrl = completeUrl;
     
     [DNHttpClient sendRequestWithURLString:completeUrl
                                 parameters:parameters
@@ -62,7 +64,7 @@
                                        [request requestSuccess:responseObject];
     } failed:^(NSError *error) {
         [self removeRequestFromRecord:request];
-        [[DNNetworkingConfig sharedConfig] registFailedPath:request.requestUrl];
+        [[DNNetworkingConfig sharedConfig].apiConfig registFailedPath:request.requestUrl];
         [request requestFailed:error];
     }];
 }
@@ -97,9 +99,16 @@
 - (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field{
     [DNHttpClient setValue:value forHTTPHeaderField:field];
 }
+/**
+ 请求头字典
+ */
+- (NSDictionary *)HTTPRequestHeaders{
+    return DNHttpClient.HTTPRequestHeaders;
+}
+
 - (BOOL)containRequest:(DNBaseRequest *)request{
     __block BOOL contain = false;
-    [_requestsRecord enumerateKeysAndObjectsUsingBlock:^(NSNumber * _Nonnull key, DNBaseRequest * _Nonnull obj, BOOL * _Nonnull stop) {
+    [_requestsRecord.allValues enumerateObjectsUsingBlock:^(DNBaseRequest * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj == request) {
             contain = true;
             *stop = YES;

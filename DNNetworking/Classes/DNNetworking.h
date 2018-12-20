@@ -6,11 +6,9 @@
 //  Copyright © 2018 Donews. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-#import "DNNetworkingMacro.h"
-
-#import <UIKit/UIKit.h>
+#import "DNNetworkingConfig.h
+#import "DNResponse.h"
+#import "DNBaseRequest.h"
 
 //! Project version number for DNNetworking.
 FOUNDATION_EXPORT double DNNetworkingVersionNumber;

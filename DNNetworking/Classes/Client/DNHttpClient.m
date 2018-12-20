@@ -90,6 +90,10 @@ static AFHTTPSessionManager *_sessionManager;
     [_sessionManager.requestSerializer setValue:value forHTTPHeaderField:field];
 }
 
++ (NSDictionary *)HTTPRequestHeaders{
+    return  _sessionManager.requestSerializer.HTTPRequestHeaders;
+}
+
 /**
  是否打开网络状态转圈菊花:默认打开
  */

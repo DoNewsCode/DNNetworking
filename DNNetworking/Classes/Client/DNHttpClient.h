@@ -45,6 +45,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
 
+
+/**
+ 请求头字典
+ */
++ (NSDictionary *)HTTPRequestHeaders;
+
 /**
  在开发中,如果以下的设置方式不满足项目的需求,就调用此方法获取AFHTTPSessionManager实例进行自定义设置
  (注意: 调用此方法时在要导入AFNetworking.h头文件,否则可能会报找不到AFHTTPSessionManager的❌)

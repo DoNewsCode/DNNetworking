@@ -9,7 +9,6 @@
 #import "DNBaseRequest.h"
 #import <objc/message.h>
 #import "YYModel.h"
-#import "DNApiConfig.h"
 #import "DNNetworkManager.h"
 #import "DNResponse.h"
 
@@ -48,8 +47,6 @@
     self.successCompletionBlock = success;
     
     self.failureCompletionBlock = failure;
-    
-//    self.completeUrl = DNAPI(self.requestUrl);
     
     self.inTheRequest = YES;
     
