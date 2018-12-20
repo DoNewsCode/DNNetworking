@@ -56,7 +56,7 @@
     
     request.completeUrl = completeUrl;
     
-    [DNHttpClient sendRequestWithURLString:completeUrl
+    NSURLSessionTask *task = [DNHttpClient sendRequestWithURLString:completeUrl
                                 parameters:parameters
                                     method:method
                                    success:^(id responseObject) {
@@ -67,6 +67,8 @@
         [[DNNetworkingConfig sharedConfig].apiConfig registFailedPath:request.requestUrl];
         [request requestFailed:error];
     }];
+    request.requestTask = task;
+    [self addRequestToRecord:request];
 }
 
 - (void)cancelRequest:(DNBaseRequest *)request{
