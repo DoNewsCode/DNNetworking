@@ -56,7 +56,7 @@
     
     request.completeUrl = completeUrl;
     
-    [DNHttpClient sendRequestWithURLString:completeUrl
+    NSURLSessionTask *task = [DNHttpClient sendRequestWithURLString:completeUrl
                                 parameters:parameters
                                     method:method
                                    success:^(id responseObject) {
@@ -67,6 +67,8 @@
         [[DNNetworkingConfig sharedConfig].apiConfig registFailedPath:request.requestUrl];
         [request requestFailed:error];
     }];
+    request.requestTask = task;
+    [self addRequestToRecord:request];
 }
 
 - (void)cancelRequest:(DNBaseRequest *)request{
@@ -107,14 +109,23 @@
 }
 
 - (BOOL)containRequest:(DNBaseRequest *)request{
-    __block BOOL contain = false;
-    [_requestsRecord.allValues enumerateObjectsUsingBlock:^(DNBaseRequest * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj == request) {
-            contain = true;
-            *stop = YES;
+    Lock();
+    NSArray *allKeys = [_requestsRecord allKeys];
+    Unlock();
+    if (allKeys && allKeys.count > 0) {
+        NSArray *copiedKeys = [allKeys copy];
+        for (NSNumber *key in copiedKeys) {
+            Lock();
+            DNBaseRequest *recordRequest = _requestsRecord[key];
+            Unlock();
+            // We are using non-recursive lock.
+            // Do not lock `stop`, otherwise deadlock may occur.
+            if ([recordRequest isEqual:request]){
+                return YES;
+            }
         }
-    }];
-    return contain;
+    }
+    return NO;
 }
 
 - (void)addRequestToRecord:(DNBaseRequest *)request {

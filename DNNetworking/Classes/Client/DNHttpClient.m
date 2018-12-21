@@ -23,11 +23,6 @@ static AFHTTPSessionManager *_sessionManager;
 @implementation DNHttpClient
 + (void)load{
     _sessionManager =  [[AFHTTPSessionManager manager] initWithBaseURL:[NSURL URLWithString:DoNewsBaseUrl]];
-    
-    [_sessionManager.requestSerializer setValue:APP_ID forHTTPHeaderField:@"appid"];
-    [_sessionManager.requestSerializer setValue:VERSION_CODE forHTTPHeaderField:@"versionCode"];
-    [_sessionManager.requestSerializer setValue:PLATFORM forHTTPHeaderField:@"platform"];
-    
     // 设置请求的超时时间
     _sessionManager.requestSerializer.timeoutInterval = 15.f;
     // 设置服务器返回结果的类型:JSON (AFJSONResponseSerializer,AFHTTPResponseSerializer)
