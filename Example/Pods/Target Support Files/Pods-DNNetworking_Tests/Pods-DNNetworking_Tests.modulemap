@@ -1,0 +1,6 @@
+framework module Pods_DNNetworking_Tests {
+  umbrella header "Pods-DNNetworking_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

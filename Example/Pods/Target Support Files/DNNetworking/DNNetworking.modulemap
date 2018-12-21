@@ -1,0 +1,6 @@
+framework module DNNetworking {
+  umbrella header "DNNetworking-umbrella.h"
+
+  export *
+  module * { export * }
+}
