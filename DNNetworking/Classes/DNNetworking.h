@@ -6,7 +6,7 @@
 //  Copyright © 2018 Donews. All rights reserved.
 //
 
-#import "DNNetworkingConfig.h
+#import "DNNetworkingConfig.h"
 #import "DNResponse.h"
 #import "DNBaseRequest.h"
 

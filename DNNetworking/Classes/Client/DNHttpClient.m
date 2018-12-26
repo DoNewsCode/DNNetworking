@@ -7,12 +7,13 @@
 //
 
 #import "DNHttpClient.h"
+#import "DNHttpClient+SSL.h"
 #import "AFNetworking.h"
 #import "AFNetworkActivityIndicatorManager.h"
+#import "DNNetworkingConfig.h"
 
 #define DoNewsBaseUrl @"https://api.g.com.cn"
 #define PLATFORM @"iOS"
-#define APP_ID @"A9VG"
 #define VERSION_CODE [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 
 static AFHTTPSessionManager *_sessionManager;
@@ -34,11 +35,13 @@ static AFHTTPSessionManager *_sessionManager;
     
     _sessionManager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
     
-    //    //基于公钥设置客服端安全策略 ssl
-    //    _sessionManager.securityPolicy = [self customSecurityPolicy];
-    //
-    //    //客服端利用p12验证服务器
-    //    [self checkCredential:_sessionManager];
+    if ([DNNetworkingConfig sharedConfig].TwoWayAuth) {
+        //    //基于公钥设置客服端安全策略 ssl
+        _sessionManager.securityPolicy = [self customSecurityPolicy];
+        //
+        //    //客服端利用p12验证服务器
+        [self checkCredential:_sessionManager];
+    }
     
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     

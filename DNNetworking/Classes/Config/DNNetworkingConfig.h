@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  request配置相关项
  */
-@property (nonatomic, copy) NSDictionary *headerDictionary;
+@property (nonatomic, strong) NSDictionary *headerDictionary;
 /**
  设置请求头
  */
@@ -84,5 +84,26 @@ NS_ASSUME_NONNULL_BEGIN
  response解析，异地登录错误回调
  */
 @property (nonatomic, copy) dispatch_block_t expiredBlock;
+
+#pragma mark - 证书配置相关项
+
+/**
+ 是否需要双向https认证
+ */
+@property (nonatomic, assign)  BOOL TwoWayAuth;
+/**
+ 需要双向https认证时cer证书路径
+ */
+@property (nonatomic, copy)  NSString * cerFilePath;
+
+/**
+ 需要双向https认证时p12证书路径
+ */
+@property (nonatomic, copy)  NSString * p12FilePath;
+
+/**
+ 需要双向https认证时p12证书密码
+ */
+@property (nonatomic, copy)  NSString * p12FilePassword;
 @end
 NS_ASSUME_NONNULL_END
