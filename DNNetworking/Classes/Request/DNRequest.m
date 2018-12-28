@@ -76,7 +76,7 @@
 }
 
 + (nullable NSArray<NSString *> *)modelPropertyBlacklist {
-    return @[@"requestMethod",@"requestUrl",@"inTheRequest",@"completeUrl",@"successCompletionBlock",@"failureCompletionBlock"];
+    return @[@"requestMethod",@"requestUrl",@"inTheRequest",@"completeUrl",@"successCompletionBlock",@"failureCompletionBlock",@"requestTask"];
 }
 
 - (NSDictionary *)parametersDictionary {
