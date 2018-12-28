@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 #import "DNNetworkingMacro.h"
-NS_ASSUME_NONNULL_BEGIN
 
 @interface DNNetworkingConfig : NSObject
 
@@ -106,4 +105,3 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, copy)  NSString * p12FilePassword;
 @end
-NS_ASSUME_NONNULL_END

@@ -12,8 +12,6 @@
 
 @property(nonatomic, copy, readonly) NSNumber *code;//响应码
 
-@property(nonatomic, copy, readonly) NSNumber *rspcode;//响应码
-
 @property(nonatomic, copy, readonly) NSString *msg;//响应信息
 
 @property(nonatomic, copy, readonly) NSString *errormsg;//响应信息

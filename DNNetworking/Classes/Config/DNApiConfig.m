@@ -97,7 +97,7 @@
     while ([apiTestHost hasSuffix:@"/"]) {
         apiTestHost = [apiTestHost substringToIndex:apiTestHost.length-1];
     }
-    _apiSparesHost = [apiTestHost copy];
+    _apiTestHost = [apiTestHost copy];
 }
 
 - (void)setApiNormalHost:(NSString *)apiNormalHost{

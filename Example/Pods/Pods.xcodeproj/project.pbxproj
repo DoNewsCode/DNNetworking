@@ -17,7 +17,7 @@
 		15F1AB626337FECD0B9CFAAD90FAC342 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 81391CE21A15B400B25C548CD8173022 /* AFNetworkActivityIndicatorManager.m */; };
 		1742D29096CAA3DD1BF1BD51E7244ACD /* Pods-DNNetworking_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B60FC8FFCB599E767B9B914ADE4631F2 /* Pods-DNNetworking_Tests-dummy.m */; };
 		186D1133EB6C6FB5FAD1E0D1E10DEDE8 /* DNNetworkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6691F76DE2F7BAD298B66232EF267258 /* DNNetworkManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2255F5804030AF33C33FBE5CE30DE244 /* DNBaseRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E8165F0FCA1A6A146C6F9D7A226D243 /* DNBaseRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2255F5804030AF33C33FBE5CE30DE244 /* DNRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E8165F0FCA1A6A146C6F9D7A226D243 /* DNRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2E68973739E2AE713059A22F94238C60 /* AFURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 50552326AB48399E1A526E212DDE9EA3 /* AFURLResponseSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3306CC78AC13AA3F830B7A3574714858 /* YYModel-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F7224AD3270EBEA42A987FD23D8E6C4 /* YYModel-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A74D4D7311CA6B474A1F1A174079A61 /* DNNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 65F5E74800AD256AF685577CE0B6DB36 /* DNNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -74,7 +74,7 @@
 		D2086F32242047979D0E408D8F717568 /* YYModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ED6CC32778B3DE65186C8B80666898B /* YYModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D3148C073661EF49A33774306FA9A3D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBDCA78EBA09D1821F5DD7CA85AED88 /* Foundation.framework */; };
 		D491FD44351A11016A957CA81ABE0EC5 /* AFURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 9600142D8F4F90C84C0F8F4DACB524B5 /* AFURLRequestSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DB4C3A60C68087D67236F4834021ACFC /* DNBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 12DB5D38CF2B26516DB9DEA53F647981 /* DNBaseRequest.m */; };
+		DB4C3A60C68087D67236F4834021ACFC /* DNRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 12DB5D38CF2B26516DB9DEA53F647981 /* DNRequest.m */; };
 		DE151284E312E2ABBDB5081BA829EE94 /* YYModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8C9790BD2FA2956850DCFFDD611E81 /* YYModel.framework */; };
 		DF74915F8F367134FA4277BE9A2F52DB /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = C2647BFEE8EA928B612BEB72038793DD /* UIProgressView+AFNetworking.m */; };
 		F0DDCDC956CB37A4C77D64BF53201CA1 /* DNNetworking-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E0ABA7850B55B0B78D9517FD5168C0 /* DNNetworking-dummy.m */; };
@@ -141,7 +141,7 @@
 		0FBDCA78EBA09D1821F5DD7CA85AED88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		117D76E5CDD24019355AB53BB9369E71 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		11800466B1C6DAF9B33CFC0558EF2CF0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		12DB5D38CF2B26516DB9DEA53F647981 /* DNBaseRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = DNBaseRequest.m; sourceTree = "<group>"; };
+		12DB5D38CF2B26516DB9DEA53F647981 /* DNRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = DNRequest.m; sourceTree = "<group>"; };
 		133BF95201ED13875B594BFA91C680D2 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIWebView+AFNetworking.h"; path = "UIKit+AFNetworking/UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		1464B00064FAAD9627C4BB5904A31062 /* Pods-DNNetworking_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DNNetworking_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		14A4639D67F7DA8803452E81CA466C51 /* AFNetworking.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = AFNetworking.modulemap; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 		536310E13D35356CB553C6F73B723984 /* UIActivityIndicatorView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIActivityIndicatorView+AFNetworking.m"; path = "UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.m"; sourceTree = "<group>"; };
 		572B5ADD1D90A5F67732F0BFCAB2D98C /* Pods-DNNetworking_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DNNetworking_Example-umbrella.h"; sourceTree = "<group>"; };
 		5BC3D5964B70AB7BC0652A58DED6EC82 /* Pods-DNNetworking_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-DNNetworking_Example.modulemap"; sourceTree = "<group>"; };
-		5E8165F0FCA1A6A146C6F9D7A226D243 /* DNBaseRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DNBaseRequest.h; sourceTree = "<group>"; };
+		5E8165F0FCA1A6A146C6F9D7A226D243 /* DNRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DNRequest.h; sourceTree = "<group>"; };
 		65F5E74800AD256AF685577CE0B6DB36 /* DNNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DNNetworking.h; path = DNNetworking/Classes/DNNetworking.h; sourceTree = "<group>"; };
 		6691F76DE2F7BAD298B66232EF267258 /* DNNetworkManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DNNetworkManager.h; sourceTree = "<group>"; };
 		6914A30ABA104EE2282F9542A7D28877 /* Pods-DNNetworking_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DNNetworking_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -369,8 +369,8 @@
 		1BA11098A86BB88592FA66E4CEE51B96 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				5E8165F0FCA1A6A146C6F9D7A226D243 /* DNBaseRequest.h */,
-				12DB5D38CF2B26516DB9DEA53F647981 /* DNBaseRequest.m */,
+				5E8165F0FCA1A6A146C6F9D7A226D243 /* DNRequest.h */,
+				12DB5D38CF2B26516DB9DEA53F647981 /* DNRequest.m */,
 			);
 			name = Request;
 			path = DNNetworking/Classes/Request;
@@ -697,7 +697,7 @@
 				186D1133EB6C6FB5FAD1E0D1E10DEDE8 /* DNNetworkManager.h in Headers */,
 				436EA14789162CAB0F46DD9D87C01536 /* DNResponse.h in Headers */,
 				A54E2F1F21CA59C600C5355D /* DNNetworkingConfig.h in Headers */,
-				2255F5804030AF33C33FBE5CE30DE244 /* DNBaseRequest.h in Headers */,
+				2255F5804030AF33C33FBE5CE30DE244 /* DNRequest.h in Headers */,
 				A5EFAD6C21CA60BD00BE1947 /* DNNetworkingMacro.h in Headers */,
 				A54E2F2021CA59C800C5355D /* DNNetworkingPrivate.h in Headers */,
 			);
@@ -917,7 +917,7 @@
 				A54E2F1D21CA520500C5355D /* DNNetworkingPrivate.m in Sources */,
 				A54E2F1E21CA521400C5355D /* DNNetworkingConfig.m in Sources */,
 				466F7C38AA897C3EC11E0CC08866366E /* DNApiConfig.m in Sources */,
-				DB4C3A60C68087D67236F4834021ACFC /* DNBaseRequest.m in Sources */,
+				DB4C3A60C68087D67236F4834021ACFC /* DNRequest.m in Sources */,
 				B66A35B787256E4D717E94349B4518D7 /* DNHttpClient.m in Sources */,
 				F0DDCDC956CB37A4C77D64BF53201CA1 /* DNNetworking-dummy.m in Sources */,
 				86913C6B587E6263A7CA26500A2B75E2 /* DNNetworkManager.m in Sources */,

@@ -35,16 +35,16 @@ static AFHTTPSessionManager *_sessionManager;
     
     _sessionManager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
     
-    if ([DNNetworkingConfig sharedConfig].TwoWayAuth) {
-        //    //基于公钥设置客服端安全策略 ssl
-        _sessionManager.securityPolicy = [self customSecurityPolicy];
-        //
-        //    //客服端利用p12验证服务器
-        [self checkCredential:_sessionManager];
-    }
-    
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
+}
+
++ (void)openTwoWayAuth{
+    //    //基于公钥设置客服端安全策略 ssl
+    _sessionManager.securityPolicy = [self customSecurityPolicy];
+    //
+    //    //客服端利用p12验证服务器
+    [self checkCredential:_sessionManager];
 }
 
 /**
@@ -101,10 +101,10 @@ static AFHTTPSessionManager *_sessionManager;
 }
 
 + (__kindof NSURLSessionTask *)sendRequestWithURLString:(NSString *)URLString
-                                                 parameters:(id)parameters
-                                                     method:(DNHttpRequestMethod)method
-                                                    success:(DNHttpRequestSuccess)success
-                                                     failed:(DNHttpRequestFailed)failed{
+                                             parameters:(id)parameters
+                                                 method:(DNHttpRequestMethod)method
+                                                success:(DNHttpRequestSuccess)success
+                                                 failed:(DNHttpRequestFailed)failed{
     NSURLSessionDataTask *task;
     switch (method) {
         case DNRequestMethodPost:

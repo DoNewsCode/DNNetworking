@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DNBaseRequest.h"
+#import "DNRequest.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DNNetworkManager : NSObject
@@ -19,10 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedManager;
 
 ///  Add request to session and start it.
-- (void)addRequest:(DNBaseRequest *)request;
+- (void)addRequest:(DNRequest *)request;
 
 ///  Cancel a request that was previously added.
-- (void)cancelRequest:(DNBaseRequest *)request;
+- (void)cancelRequest:(DNRequest *)request;
 
 ///  Cancel all requests that were previously added.
 - (void)cancelAllRequests;

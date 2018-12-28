@@ -1,18 +1,18 @@
 //
-//  DNBaseRequest.m
+//  DNRequest.m
 //  Gravity
 //
 //  Created by Ming on 2018/9/4.
 //  Copyright © 2018 DoNews. All rights reserved.
 //
 
-#import "DNBaseRequest.h"
+#import "DNRequest.h"
 #import <objc/message.h>
 #import "YYModel.h"
 #import "DNNetworkManager.h"
 #import "DNResponse.h"
 
-@interface DNBaseRequest()
+@interface DNRequest()
 
 @property (copy, nonatomic) NSString *app_id;
 
@@ -20,7 +20,7 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored"-Wprotocol"
-@implementation DNBaseRequest
+@implementation DNRequest
 #pragma clang diagnostic pop
 
 - (instancetype)init

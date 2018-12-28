@@ -13,8 +13,6 @@
 @interface DNResponse()
 @property(nonatomic, copy, readwrite) NSNumber *code;//响应码
 
-@property(nonatomic, copy, readwrite) NSNumber *rspcode;//响应码
-
 @property(nonatomic, copy, readwrite) NSString *msg;//响应信息
 
 @property(nonatomic, copy, readwrite) NSString *errormsg;//响应信息
@@ -35,47 +33,47 @@
 }
 
 -(void)setResponseObject:(id)responseObject{
-
+    
     _responseObject=responseObject;
-
+    
     @try {
         self.code = self.responseObject[[DNNetworkingConfig sharedConfig].responseCodeKey];
-        self.rspcode=self.responseObject[[DNNetworkingConfig sharedConfig].responseCodeKey];
         self.errormsg=self.responseObject[[DNNetworkingConfig sharedConfig].responseMsgKey];
         self.msg = self.responseObject[[DNNetworkingConfig sharedConfig].responseMsgKey];
         self.data=self.responseObject[[DNNetworkingConfig sharedConfig].responseDataKey];
     } @catch (NSException *exception) {
-        self.rspcode = @(1001);
+        self.code = @(1001);
         self.errormsg = @"处理数据失败";
         self.data = @{};
     } @finally {
-
+        
     }
-
+    
 }
 
 +(id)responseWithResponseObject:(id)responseObject{
-
+    
     DNResponse *response=[[DNResponse alloc] init];
-  
+    
     response.responseObject = responseObject;
-
+    
     BOOL isSuccess =
-    [response.code isEqualToNumber:[DNNetworkingConfig sharedConfig].responseSuccessCode] ||
-    [response.rspcode isEqualToNumber:[DNNetworkingConfig sharedConfig].responseSuccessCode];
+    [response.code isEqualToNumber:[DNNetworkingConfig sharedConfig].responseSuccessCode];
     
     response.failed = !isSuccess;
-
+    
     return response;
 }
 
--(void)setrspcode:(NSNumber *)rspcode{
-    _rspcode = rspcode;
-}
-
 - (void)setCode:(NSNumber *)code{
-    _code = code;
-    if ([code isEqualToNumber:[DNNetworkingConfig sharedConfig].responseExpiredode]) {
+    if ([code isKindOfClass:[NSNumber class]]) {
+        _code = code;
+    }else{
+        NSString *codeStr = [NSString stringWithFormat:@"%@",code];
+        _code = [NSDecimalNumber decimalNumberWithString:codeStr];
+    }
+    if ([DNNetworkingConfig sharedConfig].responseExpiredode &&
+        [_code isEqualToNumber:[DNNetworkingConfig sharedConfig].responseExpiredode]) {
         if ([DNNetworkingConfig sharedConfig].expiredBlock) {
             [DNNetworkingConfig sharedConfig].expiredBlock();
         }
@@ -127,7 +125,7 @@
 
 
 -(NSString *)description{
-    return [NSString stringWithFormat:@" rspcode: %@\n resMsg: %@\n data: %@\n",self.rspcode,self.errormsg,self.data];
+    return [NSString stringWithFormat:@" rspcode: %@\n resMsg: %@\n data: %@\n",self.code,self.msg,self.data];
 }
 
 

@@ -1,5 +1,5 @@
 //
-//  DNBaseRequest.h
+//  DNRequest.h
 //  Gravity
 //
 //  Created by Ming on 2018/9/4.
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define DN_A9VG_Error_Message @"网络错误，请稍后重试"
 
 
-@protocol DNBaseRequestDelegate
+@protocol DNRequestDelegate
 
 @required
 - (NSString *)requestUrl;
@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface DNBaseRequest : NSObject <DNBaseRequestDelegate>
+@interface DNRequest : NSObject <DNRequestDelegate>
 
 ///  The success callback. Note if this value is not nil and `requestFinished` delegate method is
 ///  also implemented, both will be executed but delegate method is first called. This block

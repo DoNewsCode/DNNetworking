@@ -16,7 +16,7 @@
 #define Unlock() pthread_mutex_unlock(&_lock)
 
 @interface DNNetworkManager(){
-    NSMutableDictionary<NSNumber *, DNBaseRequest *> *_requestsRecord;
+    NSMutableDictionary<NSNumber *, DNRequest *> *_requestsRecord;
     pthread_mutex_t _lock;
 }
 
@@ -45,7 +45,7 @@
     return self;
 }
 
-- (void)addRequest:(DNBaseRequest *)request{
+- (void)addRequest:(DNRequest *)request{
     NSParameterAssert(request != nil);
     if ([self containRequest:request]) {
         return;
@@ -57,21 +57,21 @@
     request.completeUrl = completeUrl;
     
     NSURLSessionTask *task = [DNHttpClient sendRequestWithURLString:completeUrl
-                                parameters:parameters
-                                    method:method
-                                   success:^(id responseObject) {
-                                       [self removeRequestFromRecord:request];
-                                       [request requestSuccess:responseObject];
-    } failed:^(NSError *error) {
-        [self removeRequestFromRecord:request];
-        [[DNNetworkingConfig sharedConfig].apiConfig registFailedPath:request.requestUrl];
-        [request requestFailed:error];
-    }];
+                                                         parameters:parameters
+                                                             method:method
+                                                            success:^(id responseObject) {
+                                                                [self removeRequestFromRecord:request];
+                                                                [request requestSuccess:responseObject];
+                                                            } failed:^(NSError *error) {
+                                                                [self removeRequestFromRecord:request];
+                                                                [[DNNetworkingConfig sharedConfig].apiConfig registFailedPath:request.requestUrl];
+                                                                [request requestFailed:error];
+                                                            }];
     request.requestTask = task;
     [self addRequestToRecord:request];
 }
 
-- (void)cancelRequest:(DNBaseRequest *)request{
+- (void)cancelRequest:(DNRequest *)request{
     NSParameterAssert(request != nil);
     [request.requestTask cancel];
     [self removeRequestFromRecord:request];
@@ -86,7 +86,7 @@
         NSArray *copiedKeys = [allKeys copy];
         for (NSNumber *key in copiedKeys) {
             Lock();
-            DNBaseRequest *request = _requestsRecord[key];
+            DNRequest *request = _requestsRecord[key];
             Unlock();
             // We are using non-recursive lock.
             // Do not lock `stop`, otherwise deadlock may occur.
@@ -108,7 +108,7 @@
     return DNHttpClient.HTTPRequestHeaders;
 }
 
-- (BOOL)containRequest:(DNBaseRequest *)request{
+- (BOOL)containRequest:(DNRequest *)request{
     Lock();
     NSArray *allKeys = [_requestsRecord allKeys];
     Unlock();
@@ -116,7 +116,7 @@
         NSArray *copiedKeys = [allKeys copy];
         for (NSNumber *key in copiedKeys) {
             Lock();
-            DNBaseRequest *recordRequest = _requestsRecord[key];
+            DNRequest *recordRequest = _requestsRecord[key];
             Unlock();
             // We are using non-recursive lock.
             // Do not lock `stop`, otherwise deadlock may occur.
@@ -128,13 +128,13 @@
     return NO;
 }
 
-- (void)addRequestToRecord:(DNBaseRequest *)request {
+- (void)addRequestToRecord:(DNRequest *)request {
     Lock();
     _requestsRecord[@(request.requestTask.taskIdentifier)] = request;
     Unlock();
 }
 
-- (void)removeRequestFromRecord:(DNBaseRequest *)request {
+- (void)removeRequestFromRecord:(DNRequest *)request {
     Lock();
     [_requestsRecord removeObjectForKey:@(request.requestTask.taskIdentifier)];
     NSLog(@"Request queue size = %zd", [_requestsRecord count]);

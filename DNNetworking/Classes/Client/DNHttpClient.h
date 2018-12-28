@@ -9,10 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "DNNetworkingMacro.h"
 
-NS_ASSUME_NONNULL_BEGIN
 @class AFHTTPSessionManager;
 
 @interface DNHttpClient : NSObject
+
+/**
+ 开启双向验证
+ */
++ (void)openTwoWayAuth;
 
 /**
  *  普通HTTP请求
@@ -25,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 + (__kindof NSURLSessionDataTask *)sendRequestWithURLString:(NSString *)URLString
-                                        parameters:(id)parameters
-                                            method:(DNHttpRequestMethod)method
-                                           success:(DNHttpRequestSuccess)success
-                                            failed:(DNHttpRequestFailed)failed;
+                                                 parameters:(id)parameters
+                                                     method:(DNHttpRequestMethod)method
+                                                    success:(DNHttpRequestSuccess)success
+                                                     failed:(DNHttpRequestFailed)failed;
 
 + (__kindof NSURLSessionTask *)POST:(NSString *)URL
                          parameters:(id)parameters
@@ -92,5 +96,3 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)setSecurityPolicyWithCerPath:(NSString *)cerPath validatesDomainName:(BOOL)validatesDomainName;
 @end
-
-NS_ASSUME_NONNULL_END

@@ -17,7 +17,7 @@
 #import "DNNetworkingPrivate.h"
 #import "DNNetworking.h"
 #import "DNNetworkManager.h"
-#import "DNBaseRequest.h"
+#import "DNRequest.h"
 #import "DNResponse.h"
 
 FOUNDATION_EXPORT double DNNetworkingVersionNumber;

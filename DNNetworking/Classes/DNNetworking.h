@@ -8,7 +8,7 @@
 
 #import "DNNetworkingConfig.h"
 #import "DNResponse.h"
-#import "DNBaseRequest.h"
+#import "DNRequest.h"
 
 //! Project version number for DNNetworking.
 FOUNDATION_EXPORT double DNNetworkingVersionNumber;

@@ -9,6 +9,7 @@
 #import "DNNetworkingPrivate.h"
 #import "DNApiConfig.h"
 #import "DNNetworkManager.h"
+#import "DNHttpClient.h"
 @implementation DNNetworkingConfig
 //单例对象
 static DNNetworkingConfig *_instance = nil;
@@ -97,6 +98,12 @@ static DNNetworkingConfig *_instance = nil;
 
 - (NSDictionary *)headerDictionary{
     return [DNNetworkManager sharedManager].HTTPRequestHeaders;
+}
+- (void)setTwoWayAuth:(BOOL)TwoWayAuth{
+    _TwoWayAuth = TwoWayAuth;
+    if (TwoWayAuth) {
+        [DNHttpClient openTwoWayAuth];
+    }
 }
 @end
 
