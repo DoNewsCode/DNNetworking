@@ -38,7 +38,9 @@
 - (NSString *)getCurrentApi:(NSString *)url{
     if ([self isAbsoluteAddress:url]) return url;
     DNApiConfigType urlType = [self.failedSet containsObject:url]?DNApiConfigTypeSpares:DNApiConfigTypeNormal;
-    return [NSString stringWithFormat:@"%@%@%@",[self getCurrentHost:urlType],_versionPath.length?_versionPath:@"",url];
+    NSString *host = [self getCurrentHost:urlType];
+    NSString *version = (_versionPath && _versionPath.length)?_versionPath:@"";
+    return [NSString stringWithFormat:@"%@%@%@",host,version,url];
 }
 
 - (void)registFailedPath:(NSString *)url{
