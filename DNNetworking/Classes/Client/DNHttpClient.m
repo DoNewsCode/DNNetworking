@@ -151,4 +151,46 @@ static AFHTTPSessionManager *_sessionManager;
     }];
     return sessionTask;
 }
+
+/**
+ 上传图片请求
+ */
+
++ (__kindof NSURLSessionTask *)uploadImageWithURL:(NSString *)URL
+                                       parameters:(id)parameters
+                                             name:(NSString *)name
+                                            image:(UIImage *)image
+                                         fileName:(NSString *)fileName
+                                       imageScale:(CGFloat)imageScale
+                                        imageType:(NSString *)imageType
+                                         progress:(DNHttpProgress)progress
+                                          success:(DNHttpRequestSuccess)success
+                                          failure:(DNHttpRequestFailed)failure
+{
+    imageType = @"jpg";
+    NSURLSessionTask *sessionTask = [_sessionManager POST:URL parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        // 图片经过等比压缩后得到的二进制文件
+        NSData *imageData = UIImageJPEGRepresentation(image, imageScale?imageScale: 1.f);
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        NSString *imageFileName = [NSString stringWithFormat:@"%@.%@",str,imageType];
+        NSString *paraName = name;
+        [formData appendPartWithFileData:imageData
+                                    name:paraName
+                                fileName:fileName.length ? [NSString stringWithFormat:@"%@.%@",fileName,imageType] : imageFileName
+                                mimeType:[NSString stringWithFormat:@"image/%@",imageType]];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        //上传进度
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            progress ? progress(uploadProgress) : nil;
+        });
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        success ? success(responseObject) : nil;
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure ? failure(error) : nil;
+    }];
+    return sessionTask;
+    
+}
 @end

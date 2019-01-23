@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, DNHttpRequestMethod) {
 };
 
 typedef void(^DNRequestSuccessBlock)(DNResponse *response);
-
+typedef void(^DNRequestProgress)(NSProgress *progress);
 typedef void(^DNRequestFailureBlock)(NSError *error);
 
 typedef NS_ENUM(NSUInteger, DNNetworkStatusType) {
@@ -44,6 +44,9 @@ typedef NS_ENUM(NSUInteger, DNResponseSerializer) {
     /** 设置响应数据为二进制格式*/
     DNResponseSerializerHTTP,
 };
+
+/** 上传或者下载的进度, Progress.completedUnitCount:当前大小 - Progress.totalUnitCount:总大小*/
+typedef void (^DNHttpProgress)(NSProgress *progress);
 
 /** 请求成功的Block */
 typedef void(^DNHttpRequestSuccess)(id responseObject);

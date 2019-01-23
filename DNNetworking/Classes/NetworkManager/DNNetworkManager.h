@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DNRequest.h"
 NS_ASSUME_NONNULL_BEGIN
+@class DNUploadImageRequest;
 
 @interface DNNetworkManager : NSObject
 
@@ -35,6 +36,15 @@ NS_ASSUME_NONNULL_BEGIN
  请求头字典
  */
 - (NSDictionary *)HTTPRequestHeaders;
+@end
+
+@interface DNNetworkManager (Upload)
+///  Add request to session and start it.
+- (void)addUploadRequest:(DNUploadImageRequest *)request;
+
+///  Cancel a request that was previously added.
+- (void)cancelUploadRequest:(DNUploadImageRequest *)request;
+
 @end
 
 NS_ASSUME_NONNULL_END

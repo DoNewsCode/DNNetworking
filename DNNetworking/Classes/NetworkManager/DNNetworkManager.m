@@ -143,3 +143,52 @@
 
 
 @end
+
+#import "DNUploadImageRequest.h"
+
+@implementation DNNetworkManager(Upload)
+
+- (void)addUploadRequest:(DNUploadImageRequest *)request{
+    NSParameterAssert(request != nil);
+    //    if ([self containRequest:request]) {
+    //        return;
+    //    }
+    NSString *completeUrl = DNURL(request.requestUrl);
+    
+    request.completeUrl = completeUrl;
+    
+    NSURLSessionUploadTask *task = [DNHttpClient uploadImageWithURL:request.completeUrl
+                                                         parameters:request.parametersDictionary
+                                                               name:request.parameterName
+                                                              image:request.file
+                                                           fileName:request.fileName
+                                                         imageScale:request.imageScale
+                                                          imageType:nil
+                                                           progress:^(NSProgress *progress)
+                                    {
+                                        if ([request respondsToSelector:@selector(uploadingWithProgress:)]) {
+                                            [request uploadingWithProgress:progress];
+                                        }
+                                    } success:^(id responseObject) {
+                                        //        [self removeRequestFromRecord:request];
+                                        if ([request respondsToSelector:@selector(requestSuccess:)]) {
+                                            [request requestSuccess:responseObject];
+                                        }
+                                    } failure:^(NSError *error) {
+                                        //        [self removeRequestFromRecord:request];
+                                        [[DNNetworkingConfig sharedConfig].apiConfig registFailedPath:request.requestUrl];
+                                        if ([request respondsToSelector:@selector(requestFailed:)]) {
+                                            [request requestFailed:error];
+                                        }
+                                    }];
+    request.requestTask = task;
+    [self addRequestToRecord:request];
+}
+
+- (void)cancelUploadRequest:(DNUploadImageRequest *)request{
+    NSParameterAssert(request != nil);
+    [request.requestTask cancel];
+    [self removeRequestFromRecord:request];
+    [request clearCompletionBlock];
+}
+@end

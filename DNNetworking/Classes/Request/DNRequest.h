@@ -34,24 +34,40 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DNRequest : NSObject <DNRequestDelegate>
 
-///  The success callback. Note if this value is not nil and `requestFinished` delegate method is
-///  also implemented, both will be executed but delegate method is first called. This block
-///  will be called on the main queue.
+/**
+ The success callback. Note if this value is not nil and `requestFinished` delegate method is
+ also implemented, both will be executed but delegate method is first called. This block
+ will be called on the main queue.
+ */
 @property (nonatomic, copy, nullable) DNRequestSuccessBlock successCompletionBlock;
 
-///  The failure callback. Note if this value is not nil and `requestFailed` delegate method is
-///  also implemented, both will be executed but delegate method is first called. This block
-///  will be called on the main queue.
+/**
+ The failure callback. Note if this value is not nil and `requestFailed` delegate method is
+ also implemented, both will be executed but delegate method is first called. This block
+ will be called on the main queue.
+ */
 @property (nonatomic, copy, nullable) DNRequestFailureBlock failureCompletionBlock;
-///  The underlying NSURLSessionTask.
-///
-///  @warning This value is actually nil and should not be accessed before the request starts.
+
+/**
+ The underlying NSURLSessionTask.
+ 
+ @warning This value is actually nil and should not be accessed before the request starts.
+ */
 @property (nonatomic, strong) NSURLSessionTask *requestTask;
 
+/**
+ 
+ */
 @property (assign, nonatomic) BOOL inTheRequest;
 
+/**
+ 
+ */
 @property (assign, nonatomic) DNHttpRequestMethod requestMethod;
 
+/**
+ 
+ */
 @property (nonatomic, copy) NSString *completeUrl;
 
 - (NSDictionary *)parametersDictionary;

@@ -44,6 +44,16 @@
                            success:(DNHttpRequestSuccess)success
                            failure:(DNHttpRequestFailed)failure;
 
++ (__kindof NSURLSessionTask *)uploadImageWithURL:(NSString *)URL
+                                       parameters:(id)parameters
+                                             name:(NSString *)name
+                                            image:(UIImage *)image
+                                         fileName:(NSString *)fileName
+                                       imageScale:(CGFloat)imageScale
+                                        imageType:(NSString *)imageType
+                                         progress:(DNHttpProgress)progress
+                                          success:(DNHttpRequestSuccess)success
+                                          failure:(DNHttpRequestFailed)failure;
 /**
  设置请求头
  */
