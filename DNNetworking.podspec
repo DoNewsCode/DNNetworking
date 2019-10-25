@@ -40,6 +40,6 @@ TODO: Add long description of the pod here.
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
   s.dependency 'AFNetworking'
-  s.dependency 'YYModel','1.0.4'
+  s.dependency 'YYModel','1.0.5'
   s.frameworks = 'Foundation'
 end

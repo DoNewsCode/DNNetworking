@@ -8,9 +8,9 @@
 NS_ASSUME_NONNULL_BEGIN
 @protocol DNUploadImageDelegate <DNRequestDelegate>
 @optional
-- (void)startWithProgress:(nullable DNRequestProgress)progress
-                  success:(nullable DNRequestSuccessBlock)success
-                  failure:(nullable DNRequestFailureBlock)failure;
+- (void)startWithSuccess:(DNRequestSuccessBlock)success
+               progress:(DNRequestProgress)progress
+                failure:(DNRequestFailureBlock)failure;
 
 ///  Remove self from request queue and cancel the request.
 - (void)stop;

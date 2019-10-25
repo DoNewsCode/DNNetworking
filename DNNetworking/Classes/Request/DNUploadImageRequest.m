@@ -81,8 +81,8 @@
 
 + (nullable NSArray<NSString *> *)modelPropertyBlacklist {
     NSArray *blackList;
-    if ([super respondsToSelector:@selector(modelPropertyBlacklist)]) {
-        blackList = [super performSelector:@selector(modelPropertyBlacklist)];
+    if ([DNRequest respondsToSelector:@selector(modelPropertyBlacklist)]) {
+        blackList = [DNRequest performSelector:@selector(modelPropertyBlacklist)];
     }
     NSMutableArray *tempArr = [NSMutableArray arrayWithArray:blackList];
     [tempArr addObjectsFromArray:@[@"parameterName",@"progressBlock",@"file",@"imageScale",@"fileName",@"imageType"]];
