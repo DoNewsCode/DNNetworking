@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DNNetworking'
-  s.version          = '1.0.10'
+  s.version          = '1.0.11'
   s.summary          = 'A short description of DNNetworking.'
 
 # This description is used to generate tags and improve search results.
@@ -40,6 +40,6 @@ TODO: Add long description of the pod here.
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
   s.dependency 'AFNetworking'
-  s.dependency 'YYModel','1.0.5'
+  s.dependency 'YYModel','1.0.4'
   s.frameworks = 'Foundation'
 end

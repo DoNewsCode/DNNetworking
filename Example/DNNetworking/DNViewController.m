@@ -7,7 +7,8 @@
 //
 
 #import "DNViewController.h"
-
+#import "DNUploadImageRequest.h"
+#import <YYModel/YYModel.h>
 @interface DNViewController ()
 
 @end
@@ -17,6 +18,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    DNUploadImageRequest *request = [[DNUploadImageRequest alloc] init];
+    NSArray *arr = [DNUploadImageRequest performSelector:@selector(modelPropertyBlacklist)];
+    NSLog(@"%@",arr);
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
