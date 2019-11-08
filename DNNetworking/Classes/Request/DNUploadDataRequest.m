@@ -45,11 +45,11 @@
     
     self.inTheRequest = YES;
     
-    [[DNNetworkManager sharedManager] addUploadRequest:self];
+    [[DNNetworkManager sharedManager] addUploadDataRequest:self];
 }
 
 - (void)stop{
-    [[DNNetworkManager sharedManager] cancelUploadRequest:self];
+    [[DNNetworkManager sharedManager] cancelUploadDataRequest:self];
 }
 
 - (void)requestSuccess:(id)responseObject{
