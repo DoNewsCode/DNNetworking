@@ -1,13 +1,15 @@
 //
-//  DNUploadImageRequest.h
-//  AFNetworking
+//  DNUploadDataRequest.h
+//  DNNetworking
 //
-//  Created by 张健康 on 2019/1/23.
+//  Created by 陈金铭 on 2019/11/8.
 //
+
 #import "DNRequest.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol DNUploadImageDelegate <DNRequestDelegate>
+@protocol DNUploadDataDelegate <DNRequestDelegate>
 @optional
 - (void)startWithSuccess:(DNRequestSuccessBlock)success
                progress:(DNRequestProgress)progress
@@ -21,25 +23,26 @@ NS_ASSUME_NONNULL_BEGIN
                  failure:(nullable DNRequestFailureBlock)failure NS_UNAVAILABLE;
 @end
 
-@interface DNUploadImageRequest : DNRequest <DNUploadImageDelegate>
+@interface DNUploadDataRequest : DNRequest
 
-/// 上传文件时文件在body的key
-@property (nonatomic, copy, nullable) NSString *parameterName;
 
 /// 上传进度回调
 @property (nonatomic, copy, nullable) DNHttpProgress progressBlock;
 
 /// 上传图片
-@property (nonatomic, strong, nullable) UIImage *file;
+@property (nonatomic, strong, nullable) NSData *data;
+/// 上传文件时文件在body的key
+@property (nonatomic, copy, nullable) NSString *parameterName;
 
-/// 图片缩放比例（默认为1.f）
-@property (nonatomic, assign) CGFloat imageScale;
-
-/// 上传图片名
+/// 上传文件名
 @property (nonatomic, copy, nullable) NSString *fileName;
+
+/// mimeType
+@property (nonatomic, copy, nullable) NSString *mimeType;
 
 
 - (void)uploadingWithProgress:(NSProgress *)progress;
+
 
 @end
 
