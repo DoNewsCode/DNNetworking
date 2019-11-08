@@ -213,10 +213,18 @@
     [self addRequestToRecord:request];
 }
 
-- (void)cancelUploadRequest:(DNUploadImageRequest *)request{
+- (void)cancelUploadRequest:(DNUploadImageRequest *)request {
     NSParameterAssert(request != nil);
     [request.requestTask cancel];
     [self removeRequestFromRecord:request];
     [request clearCompletionBlock];
 }
+
+- (void)cancelUploadDataRequest:(DNUploadDataRequest *)request {
+    NSParameterAssert(request != nil);
+    [request.requestTask cancel];
+    [self removeRequestFromRecord:request];
+    [request clearCompletionBlock];
+}
+
 @end
