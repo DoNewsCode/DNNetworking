@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
                  failure:(nullable DNRequestFailureBlock)failure NS_UNAVAILABLE;
 @end
 
-@interface DNUploadDataRequest : DNRequest
+@interface DNUploadDataRequest : DNRequest<DNUploadDataDelegate>
 
 
 /// 上传进度回调
