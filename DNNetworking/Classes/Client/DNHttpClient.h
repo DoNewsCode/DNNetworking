@@ -54,6 +54,16 @@
                                          progress:(DNHttpProgress)progress
                                           success:(DNHttpRequestSuccess)success
                                           failure:(DNHttpRequestFailed)failure;
+
++ (__kindof NSURLSessionTask *)uploadDataWithURL:(NSString *)URL
+                                      parameters:(id)parameters
+                                            data:(NSData *)data
+                                            name:(NSString *)name
+                                        fileName:(NSString *)fileName
+                                        mimeType:(NSString *)mimeType
+                                        progress:(DNHttpProgress)progress
+                                         success:(DNHttpRequestSuccess)success
+                                         failure:(DNHttpRequestFailed)failure;
 /**
  设置请求头
  */

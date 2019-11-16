@@ -145,6 +145,7 @@
 @end
 
 #import "DNUploadImageRequest.h"
+#import "DNUploadDataRequest.h"
 
 @implementation DNNetworkManager(Upload)
 
@@ -185,10 +186,45 @@
     [self addRequestToRecord:request];
 }
 
-- (void)cancelUploadRequest:(DNUploadImageRequest *)request{
+- (void)addUploadDataRequest:(DNUploadDataRequest *)request {
+    NSParameterAssert(request != nil);
+    //    if ([self containRequest:request]) {
+    //        return;
+    //    }
+    NSString *completeUrl = DNURL(request.requestUrl);
+    
+    request.completeUrl = completeUrl;
+    
+    NSURLSessionUploadTask *task = [DNHttpClient uploadDataWithURL:request.completeUrl parameters:request.parametersDictionary data:request.data name:request.parameterName fileName:request.fileName mimeType:request.mimeType progress:^(NSProgress *progress) {
+        if ([request respondsToSelector:@selector(uploadingWithProgress:)]) {
+                                                   [request uploadingWithProgress:progress];
+                                               }
+    } success:^(id responseObject) {
+        if ([request respondsToSelector:@selector(requestSuccess:)]) {
+                                                   [request requestSuccess:responseObject];
+                                               }
+    } failure:^(NSError *error) {
+        [[DNNetworkingConfig sharedConfig].apiConfig registFailedPath:request.requestUrl];
+                                               if ([request respondsToSelector:@selector(requestFailed:)]) {
+                                                   [request requestFailed:error];
+                                               }
+    }];
+    request.requestTask = task;
+    [self addRequestToRecord:request];
+}
+
+- (void)cancelUploadRequest:(DNUploadImageRequest *)request {
     NSParameterAssert(request != nil);
     [request.requestTask cancel];
     [self removeRequestFromRecord:request];
     [request clearCompletionBlock];
 }
+
+- (void)cancelUploadDataRequest:(DNUploadDataRequest *)request {
+    NSParameterAssert(request != nil);
+    [request.requestTask cancel];
+    [self removeRequestFromRecord:request];
+    [request clearCompletionBlock];
+}
+
 @end

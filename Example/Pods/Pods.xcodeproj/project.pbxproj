@@ -35,6 +35,8 @@
 		63A7B518E880C7AACABCD20AFA247C8C /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B32A17BC239C632F47509396DB65D0 /* AFSecurityPolicy.m */; };
 		63B05DD8200C971ABDD35B000918A587 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51CF50F5C60D8A5D03462455CC53E03D /* CoreGraphics.framework */; };
 		66340E06FB146280E83112B966E563C3 /* AFNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E64BF67577E0A39577176F4B8ABD803 /* AFNetworkReachabilityManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6635370523756C0C003C8097 /* DNUploadDataRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6635370323756C0C003C8097 /* DNUploadDataRequest.h */; };
+		6635370623756C0C003C8097 /* DNUploadDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6635370423756C0C003C8097 /* DNUploadDataRequest.m */; };
 		6885F9A30752A1960ADEC6689064524A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117D76E5CDD24019355AB53BB9369E71 /* SystemConfiguration.framework */; };
 		6A5E05D187005E863177B45D58905C71 /* AFImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C1E5099E8ECAD1DEF58D20E0BF0250 /* AFImageDownloader.m */; };
 		6C7C6C542448137FC3B6CEA04386780C /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C2BF1DDA96A0FBE0ED33C8237EEB701A /* AFHTTPSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -179,6 +181,8 @@
 		5BC3D5964B70AB7BC0652A58DED6EC82 /* Pods-DNNetworking_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-DNNetworking_Example.modulemap"; sourceTree = "<group>"; };
 		5E8165F0FCA1A6A146C6F9D7A226D243 /* DNRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DNRequest.h; sourceTree = "<group>"; };
 		65F5E74800AD256AF685577CE0B6DB36 /* DNNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DNNetworking.h; path = DNNetworking/Classes/DNNetworking.h; sourceTree = "<group>"; };
+		6635370323756C0C003C8097 /* DNUploadDataRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNUploadDataRequest.h; sourceTree = "<group>"; };
+		6635370423756C0C003C8097 /* DNUploadDataRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DNUploadDataRequest.m; sourceTree = "<group>"; };
 		6691F76DE2F7BAD298B66232EF267258 /* DNNetworkManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DNNetworkManager.h; sourceTree = "<group>"; };
 		6914A30ABA104EE2282F9542A7D28877 /* Pods-DNNetworking_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DNNetworking_Example.release.xcconfig"; sourceTree = "<group>"; };
 		6DFFA4ECE57964259592F1AB7A57C2AA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -379,6 +383,8 @@
 			children = (
 				5E8165F0FCA1A6A146C6F9D7A226D243 /* DNRequest.h */,
 				12DB5D38CF2B26516DB9DEA53F647981 /* DNRequest.m */,
+				6635370323756C0C003C8097 /* DNUploadDataRequest.h */,
+				6635370423756C0C003C8097 /* DNUploadDataRequest.m */,
 				A5460E0321F859CB00C8CA3A /* DNUploadImageRequest.h */,
 				A5460E0421F859CB00C8CA3A /* DNUploadImageRequest.m */,
 			);
@@ -713,6 +719,7 @@
 				2255F5804030AF33C33FBE5CE30DE244 /* DNRequest.h in Headers */,
 				A5EFAD6C21CA60BD00BE1947 /* DNNetworkingMacro.h in Headers */,
 				A54E2F2021CA59C800C5355D /* DNNetworkingPrivate.h in Headers */,
+				6635370523756C0C003C8097 /* DNUploadDataRequest.h in Headers */,
 				A5460E0721F859D200C8CA3A /* DNUploadImageRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -929,6 +936,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6635370623756C0C003C8097 /* DNUploadDataRequest.m in Sources */,
 				A54E2F1D21CA520500C5355D /* DNNetworkingPrivate.m in Sources */,
 				A54E2F1E21CA521400C5355D /* DNNetworkingConfig.m in Sources */,
 				466F7C38AA897C3EC11E0CC08866366E /* DNApiConfig.m in Sources */,

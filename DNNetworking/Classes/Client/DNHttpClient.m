@@ -193,4 +193,29 @@ static AFHTTPSessionManager *_sessionManager;
     return sessionTask;
     
 }
+
++ (__kindof NSURLSessionTask *)uploadDataWithURL:(NSString *)URL
+                                       parameters:(id)parameters
+                                            data:(NSData *)data
+                                             name:(NSString *)name
+                                         fileName:(NSString *)fileName
+                                        mimeType:(NSString *)mimeType
+                                         progress:(DNHttpProgress)progress
+                                          success:(DNHttpRequestSuccess)success
+                                          failure:(DNHttpRequestFailed)failure
+{
+    NSURLSessionTask *sessionTask = [_sessionManager POST:URL parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:data name:name fileName:fileName mimeType:mimeType];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        progress ? progress(uploadProgress) : nil;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        success ? success(responseObject) : nil;
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure ? failure(error) : nil;
+    }];
+        
+    return sessionTask;
+    
+}
+
 @end
