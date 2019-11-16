@@ -7,11 +7,12 @@
 //
 
 #import "DNAppDelegate.h"
-
+#import <DNNetworking/DNNetworkAccessibity.h>
 @implementation DNAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [DNNetworkAccessibity start];
     // Override point for customization after application launch.
     return YES;
 }

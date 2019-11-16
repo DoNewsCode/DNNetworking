@@ -10,6 +10,7 @@
 #import "DNResponse.h"
 #import "DNRequest.h"
 #import "DNUploadImageRequest.h"
+#import "DNNetworking/DNNetworkAccessibity.h"
 //! Project version number for DNNetworking.
 FOUNDATION_EXPORT double DNNetworkingVersionNumber;
 

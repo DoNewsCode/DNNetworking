@@ -9,6 +9,7 @@
 #import "DNViewController.h"
 #import "DNUploadImageRequest.h"
 #import <YYModel/YYModel.h>
+#import <DNNetworking/DNNetworkAccessibity.h>
 @interface DNViewController ()
 
 @end
@@ -18,9 +19,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    DNUploadImageRequest *request = [[DNUploadImageRequest alloc] init];
-    NSArray *arr = [DNUploadImageRequest performSelector:@selector(modelPropertyBlacklist)];
-    NSLog(@"%@",arr);
+    [DNNetworkAccessibity setStateDidUpdateNotifier:^(DNNetworkAccessibleStatus status) {
+        NSLog(@"%lu",status);
+    }];
+    NSLog(@"%lu",[DNNetworkAccessibity currentState]);
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
