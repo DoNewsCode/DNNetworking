@@ -496,9 +496,13 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
         }]];
         
         [_alertController addAction:[UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-            if([[UIApplication sharedApplication] canOpenURL:settingsURL]) {
-                [[UIApplication sharedApplication] openURL:settingsURL];
+            if (@available(iOS 9.0, *)) {
+                NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenURLOptionsSourceApplicationKey];
+                if([[UIApplication sharedApplication] canOpenURL:settingsURL]) {
+                    [[UIApplication sharedApplication] openURL:settingsURL];
+                }
+            } else {
+                // Fallback on earlier versions
             }
         }]];
     }

@@ -13,6 +13,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [DNNetworkAccessibity start];
+    [DNNetworkAccessibity setAlertEnable:YES];
     // Override point for customization after application launch.
     return YES;
 }
