@@ -120,7 +120,7 @@ typedef NS_ENUM(NSInteger, DNNetworkType) {
         return;
     }
     
-
+    
     if ([UIDevice currentDevice].systemVersion.floatValue < 10.0 || [self isSimulator]) {
         // * iOS 10 以下或者是模拟器不够用检测默认通过
         [self notiWithAccessibleState:DNNetworkAccessible];
@@ -135,7 +135,7 @@ typedef NS_ENUM(NSInteger, DNNetworkType) {
     // 此句会触发系统弹出权限询问框
     SCNetworkReachabilityScheduleWithRunLoop(_reachabilityRef, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
     
-
+    
     _becomeActiveCallbacks = [NSMutableArray array];
     
     BOOL firstRun = ({
@@ -219,7 +219,7 @@ typedef NS_ENUM(NSInteger, DNNetworkType) {
 - (void)waitActive:(dispatch_block_t)block {
     [_becomeActiveCallbacks addObject:[block copy]];
     if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
-       _checkActiveLaterWhenDidBecomeActive = YES;
+        _checkActiveLaterWhenDidBecomeActive = YES;
     } else {
         [self checkActiveLater];
     }
@@ -351,8 +351,8 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
         UIView *statusBar = nil;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000
         if (@available(iOS 13.0, *)) {
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wundeclared-selector"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
             UIStatusBarManager *statusBarManager = UIApplication.sharedApplication.keyWindow.windowScene.statusBarManager;
             if ([statusBarManager respondsToSelector:@selector(createLocalStatusBar)]) {
                 UIView *_localStatusBar = [statusBarManager performSelector:@selector(createLocalStatusBar)];
@@ -360,8 +360,8 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
                     statusBar = [_localStatusBar performSelector:@selector(statusBar)];
                 }
             }
-    #pragma clang diagnostic pop
-
+#pragma clang diagnostic pop
+            
         } else {
             statusBar = [UIApplication.sharedApplication valueForKey:@"statusBar"];
         }
@@ -382,7 +382,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
             
             BOOL cellularEnable = [[currentData valueForKeyPath:@"_cellularEntry.type"] boolValue];
             return  wifiEnable     ? DNNetworkTypeWiFi :
-                    cellularEnable ? DNNetworkTypeCellularData : DNNetworkTypeOffline;
+            cellularEnable ? DNNetworkTypeCellularData : DNNetworkTypeOffline;
         } else { // 传统的 statusBar
             NSArray *children = [[statusBar valueForKeyPath:@"foregroundView"] subviews];
             for (id child in children) {
@@ -396,7 +396,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
                 }
             }
             return type == 0 ? DNNetworkTypeOffline :
-                   type == 5 ? DNNetworkTypeWiFi    : DNNetworkTypeCellularData;
+            type == 5 ? DNNetworkTypeWiFi    : DNNetworkTypeCellularData;
         }
     } @catch (NSException *exception) {
         
@@ -457,7 +457,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 - (void)notiWithAccessibleState:(DNNetworkAccessibleStatus)state {
     if (_automaticallyAlert) {
         if (state == DNNetworkRestricted) {
-                [self showNetworkRestrictedAlert];
+            [self showNetworkRestrictedAlert];
         } else {
             [self hideNetworkRestrictedAlert];
         }
@@ -496,13 +496,14 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
         }]];
         
         [_alertController addAction:[UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            if (@available(iOS 9.0, *)) {
-                NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenURLOptionsSourceApplicationKey];
-                if([[UIApplication sharedApplication] canOpenURL:settingsURL]) {
+            NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            if([[UIApplication sharedApplication] canOpenURL:settingsURL]) {
+                if (@available(iOS 10.0, *)) {
+                    [[UIApplication sharedApplication] openURL:settingsURL options:@{} completionHandler:^(BOOL success) {
+                    }];
+                } else {
                     [[UIApplication sharedApplication] openURL:settingsURL];
                 }
-            } else {
-                // Fallback on earlier versions
             }
         }]];
     }
