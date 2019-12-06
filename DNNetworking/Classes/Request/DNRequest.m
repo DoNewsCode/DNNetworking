@@ -60,13 +60,17 @@
 - (void)requestSuccess:(id)responseObject{
     self.inTheRequest = NO;
     DNResponse *response = [DNResponse responseWithResponseObject:responseObject];
-    self.successCompletionBlock(response);
+    if (self.successCompletionBlock) {
+        self.successCompletionBlock(response);
+    }
     [self clearCompletionBlock];
 }
 
 - (void)requestFailed:(NSError *)error{
     self.inTheRequest = NO;
-    self.failureCompletionBlock(error);
+    if (self.failureCompletionBlock) {
+        self.failureCompletionBlock(error);
+    }
     [self clearCompletionBlock];
 }
 
