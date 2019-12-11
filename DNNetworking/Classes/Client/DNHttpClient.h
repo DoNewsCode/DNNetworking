@@ -64,6 +64,32 @@
                                         progress:(DNHttpProgress)progress
                                          success:(DNHttpRequestSuccess)success
                                          failure:(DNHttpRequestFailed)failure;
+
+/// download下载方法
+/// @param URL 下载地址
+/// @param fileDir 文件夹名称
+/// @param progress 进度回调
+/// @param success 成功回调
+/// @param failure 失败回调
++ (__kindof NSURLSessionTask *)downloadWithURL:(NSString *)URL
+                                       fileDir:(NSString *)fileDir
+                                      progress:(DNHttpProgress)progress
+                                       success:(DNHttpRequestSuccess)success
+                                       failure:(DNHttpRequestFailed)failure;
+
+/// download下载方法
+/// @param URL 下载地址
+/// @param fileDir 文件夹名称
+/// @param resumeData 续传data
+/// @param progress 进度回调
+/// @param success 成功回调
+/// @param failure 失败回调
++ (__kindof NSURLSessionTask *)downloadWithURL:(NSString *)URL
+                                       fileDir:(NSString *)fileDir
+                                    resumeData:(NSData *)resumeData
+                                      progress:(DNHttpProgress)progress
+                                       success:(DNHttpRequestSuccess)success
+                                       failure:(DNHttpRequestFailed)failure;
 /**
  设置请求头
  */

@@ -35,7 +35,7 @@
 		63A7B518E880C7AACABCD20AFA247C8C /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B32A17BC239C632F47509396DB65D0 /* AFSecurityPolicy.m */; };
 		63B05DD8200C971ABDD35B000918A587 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51CF50F5C60D8A5D03462455CC53E03D /* CoreGraphics.framework */; };
 		66340E06FB146280E83112B966E563C3 /* AFNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E64BF67577E0A39577176F4B8ABD803 /* AFNetworkReachabilityManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6635370523756C0C003C8097 /* DNUploadDataRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6635370323756C0C003C8097 /* DNUploadDataRequest.h */; };
+		6635370523756C0C003C8097 /* DNUploadDataRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6635370323756C0C003C8097 /* DNUploadDataRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6635370623756C0C003C8097 /* DNUploadDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6635370423756C0C003C8097 /* DNUploadDataRequest.m */; };
 		6885F9A30752A1960ADEC6689064524A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117D76E5CDD24019355AB53BB9369E71 /* SystemConfiguration.framework */; };
 		6A5E05D187005E863177B45D58905C71 /* AFImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C1E5099E8ECAD1DEF58D20E0BF0250 /* AFImageDownloader.m */; };
@@ -58,6 +58,8 @@
 		A5171F9C21D3617F007F6E79 /* DNHttpClient+SSL.m in Sources */ = {isa = PBXBuildFile; fileRef = A5171F9A21D3617F007F6E79 /* DNHttpClient+SSL.m */; };
 		A51DA5B9237FE28D0060D38E /* DNNetworkAccessibity.h in Headers */ = {isa = PBXBuildFile; fileRef = A51DA5B7237FE28D0060D38E /* DNNetworkAccessibity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A51DA5BA237FE28D0060D38E /* DNNetworkAccessibity.m in Sources */ = {isa = PBXBuildFile; fileRef = A51DA5B8237FE28D0060D38E /* DNNetworkAccessibity.m */; };
+		A52DA565239FBB18007F419F /* DNDownloadRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A52DA563239FBB18007F419F /* DNDownloadRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A52DA566239FBB18007F419F /* DNDownloadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A52DA564239FBB18007F419F /* DNDownloadRequest.m */; };
 		A5460E0721F859D200C8CA3A /* DNUploadImageRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A5460E0321F859CB00C8CA3A /* DNUploadImageRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5460E0821F859D600C8CA3A /* DNUploadImageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A5460E0421F859CB00C8CA3A /* DNUploadImageRequest.m */; };
 		A54E2F1D21CA520500C5355D /* DNNetworkingPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = A57D011321CA3C3A00EB3A7A /* DNNetworkingPrivate.m */; };
@@ -222,6 +224,8 @@
 		A51DA5B7237FE28D0060D38E /* DNNetworkAccessibity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNNetworkAccessibity.h; sourceTree = "<group>"; };
 		A51DA5B8237FE28D0060D38E /* DNNetworkAccessibity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DNNetworkAccessibity.m; sourceTree = "<group>"; };
 		A523AC6D5FCFBF7B21EF56EBCD2B599E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		A52DA563239FBB18007F419F /* DNDownloadRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNDownloadRequest.h; sourceTree = "<group>"; };
+		A52DA564239FBB18007F419F /* DNDownloadRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DNDownloadRequest.m; sourceTree = "<group>"; };
 		A5460E0321F859CB00C8CA3A /* DNUploadImageRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNUploadImageRequest.h; sourceTree = "<group>"; };
 		A5460E0421F859CB00C8CA3A /* DNUploadImageRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DNUploadImageRequest.m; sourceTree = "<group>"; };
 		A57D011221CA3C3A00EB3A7A /* DNNetworkingPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNNetworkingPrivate.h; sourceTree = "<group>"; };
@@ -387,6 +391,8 @@
 				6635370423756C0C003C8097 /* DNUploadDataRequest.m */,
 				A5460E0321F859CB00C8CA3A /* DNUploadImageRequest.h */,
 				A5460E0421F859CB00C8CA3A /* DNUploadImageRequest.m */,
+				A52DA563239FBB18007F419F /* DNDownloadRequest.h */,
+				A52DA564239FBB18007F419F /* DNDownloadRequest.m */,
 			);
 			name = Request;
 			path = DNNetworking/Classes/Request;
@@ -716,6 +722,7 @@
 				186D1133EB6C6FB5FAD1E0D1E10DEDE8 /* DNNetworkManager.h in Headers */,
 				436EA14789162CAB0F46DD9D87C01536 /* DNResponse.h in Headers */,
 				A54E2F1F21CA59C600C5355D /* DNNetworkingConfig.h in Headers */,
+				A52DA565239FBB18007F419F /* DNDownloadRequest.h in Headers */,
 				2255F5804030AF33C33FBE5CE30DE244 /* DNRequest.h in Headers */,
 				A5EFAD6C21CA60BD00BE1947 /* DNNetworkingMacro.h in Headers */,
 				A54E2F2021CA59C800C5355D /* DNNetworkingPrivate.h in Headers */,
@@ -944,6 +951,7 @@
 				B66A35B787256E4D717E94349B4518D7 /* DNHttpClient.m in Sources */,
 				F0DDCDC956CB37A4C77D64BF53201CA1 /* DNNetworking-dummy.m in Sources */,
 				A51DA5BA237FE28D0060D38E /* DNNetworkAccessibity.m in Sources */,
+				A52DA566239FBB18007F419F /* DNDownloadRequest.m in Sources */,
 				A5460E0821F859D600C8CA3A /* DNUploadImageRequest.m in Sources */,
 				86913C6B587E6263A7CA26500A2B75E2 /* DNNetworkManager.m in Sources */,
 				A5171F9C21D3617F007F6E79 /* DNHttpClient+SSL.m in Sources */,

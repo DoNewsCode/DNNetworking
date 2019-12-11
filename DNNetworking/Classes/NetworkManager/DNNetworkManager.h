@@ -10,7 +10,7 @@
 #import "DNRequest.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@class DNUploadImageRequest,DNUploadDataRequest;
+@class DNUploadImageRequest,DNUploadDataRequest,DNDownloadRequest;
 
 @interface DNNetworkManager : NSObject
 
@@ -49,6 +49,37 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)cancelUploadDataRequest:(DNUploadDataRequest *)request;
 
+@end
+
+
+@interface DNNetworkManager (Upload)
+
+///  Add request to session and start it.
+- (void)addUploadRequest:(DNUploadImageRequest *)request;
+
+- (void)addUploadDataRequest:(DNUploadDataRequest *)request;
+
+///  Cancel a request that was previously added.
+- (void)cancelUploadRequest:(DNUploadImageRequest *)request;
+
+- (void)cancelUploadDataRequest:(DNUploadDataRequest *)request;
+
+@end
+
+
+@interface DNNetworkManager (Download)
+
+///  Add request to session and start it.
+- (void)addDownloadRequest:(DNDownloadRequest *)request;
+
+///  Cancel a request that was previously added.
+- (void)cancelDownloadRequest:(DNDownloadRequest *)request;
+
+- (void)suspendDownloadRequest:(DNDownloadRequest *)request;
+
+- (void)resumeDownloadRequest:(DNDownloadRequest *)request;
+
+- (void)stopDownloadRequest:(DNDownloadRequest *)request;
 @end
 
 NS_ASSUME_NONNULL_END

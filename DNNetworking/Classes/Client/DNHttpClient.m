@@ -218,4 +218,80 @@ static AFHTTPSessionManager *_sessionManager;
     
 }
 
+
+/**
+ 下载文件
+ */
++ (__kindof NSURLSessionTask *)downloadWithURL:(NSString *)URL
+                                       fileDir:(NSString *)fileDir
+                                      progress:(DNHttpProgress)progress
+                                       success:(DNHttpRequestSuccess)success
+                                       failure:(DNHttpRequestFailed)failure
+{
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:URL]];
+    __block NSURLSessionDownloadTask *downloadTask = [_sessionManager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        //下载进度
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            progress ? progress(downloadProgress) : nil;
+        });
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+
+        NSString *downloadDir = [NSString stringWithFormat:@"%@",fileDir];
+        if (!downloadDir || !downloadDir.length) {
+            //拼接缓存目录
+            downloadDir = [self commonFilePath];
+        }
+        //返回文件位置的URL路径
+        return [NSURL fileURLWithPath:[downloadDir stringByAppendingPathComponent:response.suggestedFilename]];
+        
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        if(failure && error) {failure(error) ; return ;};
+        success ? success(filePath.absoluteString /** NSURL->NSString*/) : nil;
+    }];
+    return downloadTask;
+
+}
+
++ (__kindof NSURLSessionTask *)downloadWithURL:(NSString *)URL
+                                       fileDir:(NSString *)fileDir
+                                    resumeData:(NSData *)resumeData
+                                      progress:(DNHttpProgress)progress
+                                       success:(DNHttpRequestSuccess)success
+                                       failure:(DNHttpRequestFailed)failure
+{
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:URL]];
+    
+    __block NSURLSessionDownloadTask *downloadTask = [_sessionManager downloadTaskWithResumeData:resumeData progress:^(NSProgress * _Nonnull downloadProgress) {
+        //下载进度
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            progress ? progress(downloadProgress) : nil;
+        });
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+
+        NSString *downloadDir = [NSString stringWithFormat:@"%@",fileDir];
+        if (!downloadDir || !downloadDir.length) {
+            //拼接缓存目录
+            downloadDir = [self commonFilePath];
+        }
+        //返回文件位置的URL路径
+        return [NSURL fileURLWithPath:[downloadDir stringByAppendingPathComponent:response.suggestedFilename]];
+        
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        if(failure && error) {failure(error) ; return ;};
+        success ? success(filePath.absoluteString /** NSURL->NSString*/) : nil;
+    }];
+    return downloadTask;
+
+}
+
++ (NSString *)commonFilePath{
+    //拼接缓存目录
+    NSString *downloadDir = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"Download"];
+    //打开文件管理器
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    //创建Download目录
+    [fileManager createDirectoryAtPath:downloadDir withIntermediateDirectories:YES attributes:nil error:nil];
+    //拼接文件路径
+    return downloadDir;
+}
 @end

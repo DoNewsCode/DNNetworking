@@ -228,3 +228,59 @@
 }
 
 @end
+#import "DNDownloadRequest.h"
+@implementation DNNetworkManager(Download)
+///  Add request to session and start it.
+- (void)addDownloadRequest:(DNDownloadRequest *)request{
+    NSParameterAssert(request != nil);
+    NSString *completeUrl = DNURL(request.requestUrl);
+
+    request.completeUrl = completeUrl;
+    
+    DNHttpRequestSuccess success = ^(id responseObject) {
+        [self removeRequestFromRecord:request];
+        [request requestSuccess:responseObject];
+    };
+    
+    DNHttpRequestFailed failure = ^(NSError *error) {
+        [self removeRequestFromRecord:request];
+        [[DNNetworkingConfig sharedConfig].apiConfig registFailedPath:request.requestUrl];
+        [request requestFailed:error];
+    };
+    
+    
+    if (request.resumeData && request.resumeData.length) {
+        [DNHttpClient downloadWithURL:request.completeUrl fileDir:request.filePath resumeData:request.resumeData progress:request.progressBlock success:success failure:failure];
+    }else{
+        [DNHttpClient downloadWithURL:request.completeUrl fileDir:request.filePath progress:request.progressBlock success:success failure:failure];
+    }
+}
+
+///  Cancel a request that was previously added.
+- (void)cancelDownloadRequest:(DNDownloadRequest *)request{
+    NSParameterAssert(request != nil);
+    if (![request.requestTask isKindOfClass:[NSURLSessionDownloadTask class]]) {
+        [request.requestTask cancel];
+        return;
+    }else{
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        NSURLSessionDownloadTask *downloadTask = (NSURLSessionDownloadTask *)request.requestTask;
+        [downloadTask cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
+            request.resumeData = resumeData;
+            dispatch_semaphore_signal(sema);
+        }];
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    }
+    [self removeRequestFromRecord:request];
+    [request clearCompletionBlock];
+}
+
+- (void)suspendDownloadRequest:(DNDownloadRequest *)request{
+    [request.requestTask suspend];
+    
+}
+
+- (void)resumeDownloadRequest:(DNDownloadRequest *)request{
+    [request.requestTask resume];
+}
+@end
