@@ -70,13 +70,20 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, copy) NSString *completeUrl;
 
+
+/// 通过重写此方法可完成例如sign认证等接口配置
 - (NSDictionary *)parametersDictionary;
+
+
+/// 获取请求参数此方法会调用 parametersDictionary 以获取请求参数并存放，每次请求（startWithSuccess:failure:）会重新调用parametersDictionary并更新存放
+- (NSDictionary *)obtainParameters;
 
 - (void)clearCompletionBlock;
 
 - (void)requestSuccess:(id)responseObject;
 
 - (void)requestFailed:(NSError *)error;
+
 @end
 
 NS_ASSUME_NONNULL_END

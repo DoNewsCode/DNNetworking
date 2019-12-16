@@ -14,7 +14,7 @@
 
 @interface DNRequest()
 
-@property (copy, nonatomic) NSString *app_id;
+@property (copy, nonatomic) NSDictionary *parameters;
 
 @end
 
@@ -42,6 +42,10 @@
     
     if (self.inTheRequest) {
         return;
+    }
+    
+    if (self.parameters) {
+        self.parameters = nil;
     }
     
     self.successCompletionBlock = success;
@@ -85,6 +89,16 @@
 
 - (NSDictionary *)parametersDictionary {
     return [self yy_modelToJSONObject];
+}
+
+- (NSDictionary *)obtainParameters {
+    if (self.parameters) {
+        return self.parameters;
+    } else {
+        NSDictionary *parameters = [self parametersDictionary];
+        self.parameters = parameters;
+        return parameters;
+    }
 }
 
 @end

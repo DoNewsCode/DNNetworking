@@ -17,7 +17,9 @@
 //#define kTestHost           @"DNApiConfigTypeTestHost"//测试地址
 
 @interface DNApiConfig ()
+
 @property (nonatomic ,strong) NSMutableSet *failedSet;
+
 @end
 
 @implementation DNApiConfig

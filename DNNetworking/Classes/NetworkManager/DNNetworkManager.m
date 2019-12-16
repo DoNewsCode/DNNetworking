@@ -51,7 +51,7 @@
         return;
     }
     NSString *completeUrl = DNURL(request.requestUrl);
-    NSDictionary *parameters = request.parametersDictionary;
+    NSDictionary *parameters = request.obtainParameters;
     DNHttpRequestMethod method = request.requestMethod;
     
     request.completeUrl = completeUrl;
