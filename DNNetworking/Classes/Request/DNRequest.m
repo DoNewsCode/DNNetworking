@@ -44,9 +44,7 @@
         return;
     }
     
-    if (self.parameters) {
-        self.parameters = nil;
-    }
+    self.parameters = nil;
     
     self.successCompletionBlock = success;
     
@@ -92,12 +90,12 @@
 }
 
 - (NSDictionary *)obtainParameters {
-    if (self.parameters) {
-        return self.parameters;
+    if (_parameters) {
+        return _parameters;
     } else {
         NSDictionary *parameters = [self parametersDictionary];
-        self.parameters = parameters;
-        return parameters;
+        _parameters = parameters;
+        return _parameters;
     }
 }
 
