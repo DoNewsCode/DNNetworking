@@ -159,7 +159,7 @@
     request.completeUrl = completeUrl;
     
     NSURLSessionUploadTask *task = [DNHttpClient uploadImageWithURL:request.completeUrl
-                                                         parameters:request.parametersDictionary
+                                                         parameters:request.obtainParameters
                                                                name:request.parameterName
                                                               image:request.file
                                                            fileName:request.fileName
@@ -195,7 +195,7 @@
     
     request.completeUrl = completeUrl;
     
-    NSURLSessionUploadTask *task = [DNHttpClient uploadDataWithURL:request.completeUrl parameters:request.parametersDictionary data:request.data name:request.parameterName fileName:request.fileName mimeType:request.mimeType progress:^(NSProgress *progress) {
+    NSURLSessionUploadTask *task = [DNHttpClient uploadDataWithURL:request.completeUrl parameters:request.obtainParameters data:request.data name:request.parameterName fileName:request.fileName mimeType:request.mimeType progress:^(NSProgress *progress) {
         if ([request respondsToSelector:@selector(uploadingWithProgress:)]) {
                                                    [request uploadingWithProgress:progress];
                                                }
