@@ -32,6 +32,11 @@
     return self;
 }
 
++ (NSArray *)modelPropertyBlacklist {
+    return @[@"parameters",@"successCompletionBlock",@"failureCompletionBlock",@"requestTask",@"inTheRequest",@"requestMethod",@"completeUrl"];
+}
+
+
 ///  Convenience method to start the request with block callbacks.
 - (void)startWithSuccess:(nullable DNRequestSuccessBlock)success
                  failure:(nullable DNRequestFailureBlock)failure{
