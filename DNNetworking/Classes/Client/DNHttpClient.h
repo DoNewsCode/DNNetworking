@@ -73,6 +73,7 @@
 /// @param failure 失败回调
 + (__kindof NSURLSessionTask *)downloadWithURL:(NSString *)URL
                                        fileDir:(NSString *)fileDir
+                                      fileName:(NSString *)fileName
                                       progress:(DNHttpProgress)progress
                                        success:(DNHttpRequestSuccess)success
                                        failure:(DNHttpRequestFailed)failure;
@@ -86,6 +87,7 @@
 /// @param failure 失败回调
 + (__kindof NSURLSessionTask *)downloadWithURL:(NSString *)URL
                                        fileDir:(NSString *)fileDir
+                                      fileName:(NSString *)fileName
                                     resumeData:(NSData *)resumeData
                                       progress:(DNHttpProgress)progress
                                        success:(DNHttpRequestSuccess)success

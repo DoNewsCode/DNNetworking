@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DNNetworking'
-  s.version          = '1.2.6'
+  s.version          = '1.2.7'
   s.summary          = 'A short description of DNNetworking.'
 
 # This description is used to generate tags and improve search results.

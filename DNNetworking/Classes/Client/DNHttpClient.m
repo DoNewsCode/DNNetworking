@@ -224,6 +224,7 @@ static AFHTTPSessionManager *_sessionManager;
  */
 + (__kindof NSURLSessionTask *)downloadWithURL:(NSString *)URL
                                        fileDir:(NSString *)fileDir
+                                      fileName:(NSString *)fileName
                                       progress:(DNHttpProgress)progress
                                        success:(DNHttpRequestSuccess)success
                                        failure:(DNHttpRequestFailed)failure
@@ -236,13 +237,17 @@ static AFHTTPSessionManager *_sessionManager;
         });
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
 
-        NSString *downloadDir = [NSString stringWithFormat:@"%@",fileDir];
+        NSString *downloadDir = fileDir;
         if (!downloadDir || !downloadDir.length) {
             //拼接缓存目录
             downloadDir = [self commonFilePath];
         }
+        NSString *downloadName = fileName;
+        if (!downloadName || !downloadName.length) {
+            downloadName = response.suggestedFilename;
+        }
         //返回文件位置的URL路径
-        return [NSURL fileURLWithPath:[downloadDir stringByAppendingPathComponent:response.suggestedFilename]];
+        return [NSURL fileURLWithPath:[downloadDir stringByAppendingPathComponent:downloadName]];
         
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
         if(failure && error) {failure(error) ; return ;};
@@ -254,6 +259,7 @@ static AFHTTPSessionManager *_sessionManager;
 
 + (__kindof NSURLSessionTask *)downloadWithURL:(NSString *)URL
                                        fileDir:(NSString *)fileDir
+                                      fileName:(NSString *)fileName
                                     resumeData:(NSData *)resumeData
                                       progress:(DNHttpProgress)progress
                                        success:(DNHttpRequestSuccess)success
@@ -268,13 +274,17 @@ static AFHTTPSessionManager *_sessionManager;
         });
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
 
-        NSString *downloadDir = [NSString stringWithFormat:@"%@",fileDir];
+        NSString *downloadDir = fileDir;
         if (!downloadDir || !downloadDir.length) {
             //拼接缓存目录
             downloadDir = [self commonFilePath];
         }
+        NSString *downloadName = fileName;
+        if (!downloadName || !downloadName.length) {
+            downloadName = response.suggestedFilename;
+        }
         //返回文件位置的URL路径
-        return [NSURL fileURLWithPath:[downloadDir stringByAppendingPathComponent:response.suggestedFilename]];
+        return [NSURL fileURLWithPath:[downloadDir stringByAppendingPathComponent:downloadName]];
         
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
         if(failure && error) {failure(error) ; return ;};

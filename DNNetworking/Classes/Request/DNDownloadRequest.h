@@ -30,8 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 需自己保存到本地，需要断点续传时，把数据取出并赋值在此字段下start
 @property (nonatomic, copy, nullable) NSData *resumeData;
 
-/// 下载文件路径
+/// 下载文件夹
 @property (nonatomic, copy, nullable) NSString *filePath;
+
+/// 下载文件名
+@property (nonatomic, copy, nullable) NSString *fileName;
 
 @end
 

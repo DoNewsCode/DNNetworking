@@ -250,9 +250,9 @@
     
     
     if (request.resumeData && request.resumeData.length) {
-        [DNHttpClient downloadWithURL:request.completeUrl fileDir:request.filePath resumeData:request.resumeData progress:request.progressBlock success:success failure:failure];
+        [DNHttpClient downloadWithURL:request.completeUrl fileDir:request.filePath fileName:request.fileName resumeData:request.resumeData progress:request.progressBlock success:success failure:failure];
     }else{
-        [DNHttpClient downloadWithURL:request.completeUrl fileDir:request.filePath progress:request.progressBlock success:success failure:failure];
+        [DNHttpClient downloadWithURL:request.completeUrl fileDir:request.filePath fileName:request.fileName progress:request.progressBlock success:success failure:failure];
     }
 }
 
