@@ -253,6 +253,7 @@ static AFHTTPSessionManager *_sessionManager;
         if(failure && error) {failure(error) ; return ;};
         success ? success(filePath.absoluteString /** NSURL->NSString*/) : nil;
     }];
+    [downloadTask resume];
     return downloadTask;
 
 }
@@ -290,6 +291,7 @@ static AFHTTPSessionManager *_sessionManager;
         if(failure && error) {failure(error) ; return ;};
         success ? success(filePath.absoluteString /** NSURL->NSString*/) : nil;
     }];
+    [downloadTask resume];
     return downloadTask;
 
 }
