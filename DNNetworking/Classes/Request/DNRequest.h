@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DNNetworkingMacro.h"
 
-@class DNResponse;
+#import "DNResponse.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
