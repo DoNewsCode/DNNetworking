@@ -70,6 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, copy) NSString *completeUrl;
 
+@property (nonatomic, strong) id object;
 
 /// 通过重写此方法可完成例如sign认证等接口配置
 - (NSDictionary *)parametersDictionary;
