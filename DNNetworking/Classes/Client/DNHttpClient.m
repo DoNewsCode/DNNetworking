@@ -124,7 +124,7 @@ static AFHTTPSessionManager *_sessionManager;
                            success:(DNHttpRequestSuccess)success
                            failure:(DNHttpRequestFailed)failure
 {
-    NSURLSessionTask *sessionTask = [_sessionManager GET:URL parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    NSURLSessionTask *sessionTask = [_sessionManager GET:URL parameters:parameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         success ? success(responseObject) : nil;
@@ -142,7 +142,7 @@ static AFHTTPSessionManager *_sessionManager;
                             success:(DNHttpRequestSuccess)success
                             failure:(DNHttpRequestFailed)failure
 {
-    NSURLSessionTask *sessionTask = [_sessionManager POST:URL parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    NSURLSessionTask *sessionTask = [_sessionManager POST:URL parameters:parameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         success ? success(responseObject) : nil;
@@ -168,7 +168,7 @@ static AFHTTPSessionManager *_sessionManager;
                                           failure:(DNHttpRequestFailed)failure
 {
     imageType = @"jpg";
-    NSURLSessionTask *sessionTask = [_sessionManager POST:URL parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    NSURLSessionTask *sessionTask = [_sessionManager POST:URL parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         // 图片经过等比压缩后得到的二进制文件
         NSData *imageData = UIImageJPEGRepresentation(image, imageScale?imageScale: 1.f);
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -204,7 +204,7 @@ static AFHTTPSessionManager *_sessionManager;
                                           success:(DNHttpRequestSuccess)success
                                           failure:(DNHttpRequestFailed)failure
 {
-    NSURLSessionTask *sessionTask = [_sessionManager POST:URL parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    NSURLSessionTask *sessionTask = [_sessionManager POST:URL parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:data name:name fileName:fileName mimeType:mimeType];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         progress ? progress(uploadProgress) : nil;

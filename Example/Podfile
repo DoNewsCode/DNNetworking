@@ -1,11 +1,9 @@
 use_frameworks!
 
-platform :ios, '8.0'
+platform :ios, '9.0'
 
 target 'DNNetworking_Example' do
   pod 'DNNetworking', :path => '../'
-  pod 'AFNetworking'
-  pod 'YYModel'
   target 'DNNetworking_Tests' do
     inherit! :search_paths
 	
