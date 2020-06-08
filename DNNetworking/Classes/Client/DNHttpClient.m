@@ -28,6 +28,8 @@ static AFHTTPSessionManager *_sessionManager;
     _sessionManager.requestSerializer.timeoutInterval = 15.f;
     // 设置服务器返回结果的类型:JSON (AFJSONResponseSerializer,AFHTTPResponseSerializer)
     _sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
+    // 设置请求的类型:JSON (AFJSONRequestSerializer)
+    _sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
     
     _sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/plain", @"text/javascript", @"text/xml", @"image/*", nil];
     // 打开状态栏的等待菊花
