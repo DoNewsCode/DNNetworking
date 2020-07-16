@@ -11,6 +11,8 @@
 
 @class AFHTTPSessionManager;
 
+static AFHTTPSessionManager *_sessionManager;
+
 @interface DNHttpClient : NSObject
 
 /**

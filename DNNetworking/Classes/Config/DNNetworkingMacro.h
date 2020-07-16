@@ -14,6 +14,7 @@
 typedef NS_ENUM(NSInteger, DNHttpRequestMethod) {
     DNRequestMethodPost = 0,
     DNRequestMethodGET,
+    DNRequestMethodDELETE,
 };
 
 typedef void(^DNRequestSuccessBlock)(DNResponse *response);

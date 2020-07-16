@@ -16,7 +16,7 @@
 #define PLATFORM @"iOS"
 #define VERSION_CODE [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 
-static AFHTTPSessionManager *_sessionManager;
+
 
 @interface DNHttpClient()
 
@@ -115,10 +115,27 @@ static AFHTTPSessionManager *_sessionManager;
         case DNRequestMethodGET:
             task = [self GET:URLString parameters:parameters success:success failure:failed];
             break;
+        case DNRequestMethodDELETE:
+            task = [self DELETE:URLString parameters:parameters success:success failure:failed];
+            break;
         default:
             break;
     }
     return task;
+}
+
++ (__kindof NSURLSessionTask *)DELETE:(NSString *)URL
+                        parameters:(id)parameters
+                           success:(DNHttpRequestSuccess)success
+                           failure:(DNHttpRequestFailed)failure
+{
+    NSURLSessionTask *sessionTask = [_sessionManager DELETE:URL parameters:parameters headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        success ? success(responseObject) : nil;
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure ? failure(error) : nil;
+        
+    }];
+    return sessionTask;
 }
 
 + (__kindof NSURLSessionTask *)GET:(NSString *)URL
