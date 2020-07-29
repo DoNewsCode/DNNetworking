@@ -99,6 +99,10 @@ static AFHTTPSessionManager *_sessionManager;
  */
 + (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
 
+/**
+ 清除请求头
+ */
++ (void)clearAuthorizationHeader;
 
 /**
  请求头字典

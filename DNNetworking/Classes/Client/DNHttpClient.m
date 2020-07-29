@@ -90,6 +90,14 @@
     [_sessionManager.requestSerializer setValue:value forHTTPHeaderField:field];
 }
 
+/**
+ 清除请求头
+ */
++ (void)clearAuthorizationHeader
+{
+    [_sessionManager.requestSerializer clearAuthorizationHeader];
+}
+
 + (NSDictionary *)HTTPRequestHeaders{
     return  _sessionManager.requestSerializer.HTTPRequestHeaders;
 }
