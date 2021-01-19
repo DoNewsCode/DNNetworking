@@ -15,18 +15,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define DN_A9VG_Error_Message @"网络错误，请稍后重试"
 
+typedef enum : NSUInteger {
+    RenrenRequestSerializerTypeDefault,
+    RenrenRequestSerializerTypeJson,
+} RenrenRequestSerializerType;
 
 @protocol DNRequestDelegate
 
 @required
 - (NSString *)requestUrl;
 
-
 @optional
 ///  Convenience method to start the request with block callbacks.
 - (void)startWithSuccess:(nullable DNRequestSuccessBlock)success
                  failure:(nullable DNRequestFailureBlock)failure;
 
+/// 请求的表单类型
+- (RenrenRequestSerializerType)requestSeriaLizerType;
 ///  Remove self from request queue and cancel the request.
 - (void)stop;
 
