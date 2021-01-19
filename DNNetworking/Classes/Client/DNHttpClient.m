@@ -116,9 +116,6 @@
                                                 success:(DNHttpRequestSuccess)success
                                                  failed:(DNHttpRequestFailed)failed{
     NSURLSessionDataTask *task;
-    
-    
-    
     switch (method) {
         case DNRequestMethodPost:
             task = [self POST:URLString parameters:parameters success:success failure:failed];

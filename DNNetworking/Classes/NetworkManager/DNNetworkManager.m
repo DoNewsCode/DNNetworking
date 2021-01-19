@@ -12,9 +12,6 @@
 #import "DNNetworkingConfig.h"
 #import "DNResponse.h"
 #import "DNNetworkingPrivate.h"
-
-#import "AFHTTPSessionManager.h"
-
 #define Lock() pthread_mutex_lock(&_lock)
 #define Unlock() pthread_mutex_unlock(&_lock)
 
@@ -58,20 +55,6 @@
     DNHttpRequestMethod method = request.requestMethod;
     
     request.completeUrl = completeUrl;
-    
-    _sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    _sessionManager.requestSerializer.timeoutInterval = 15.0f;
-    
-    if ([request respondsToSelector:@selector(requestSeriaLizerType)]) {
-        
-        RenrenRequestSerializerType type = [request requestSeriaLizerType];
-        
-        if (type == RenrenRequestSerializerTypeJson) {
-            _sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
-            _sessionManager.requestSerializer.timeoutInterval = 15.0f;
-        }
-        
-    }
     
     NSURLSessionTask *task = [DNHttpClient sendRequestWithURLString:completeUrl
                                                          parameters:parameters
