@@ -59,19 +59,23 @@
     
     request.completeUrl = completeUrl;
     
-    _sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    _sessionManager.requestSerializer.timeoutInterval = 15.0f;
-    
-    if ([request respondsToSelector:@selector(requestSeriaLizerType)]) {
+    [DNHttpClient setAFHTTPSessionManagerProperty:^(AFHTTPSessionManager *sessionManager) {
         
-        RenrenRequestSerializerType type = [request requestSeriaLizerType];
+        sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        sessionManager.requestSerializer.timeoutInterval = 15.0f;
         
-        if (type == RenrenRequestSerializerTypeJson) {
-            _sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
-            _sessionManager.requestSerializer.timeoutInterval = 15.0f;
+        if ([request respondsToSelector:@selector(requestSeriaLizerType)]) {
+            
+            RenrenRequestSerializerType type = [request requestSeriaLizerType];
+            
+            if (type == RenrenRequestSerializerTypeJson) {
+                sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+                sessionManager.requestSerializer.timeoutInterval = 15.0f;
+            }
+            
         }
         
-    }
+    }];
     
     NSURLSessionTask *task = [DNHttpClient sendRequestWithURLString:completeUrl
                                                          parameters:parameters
