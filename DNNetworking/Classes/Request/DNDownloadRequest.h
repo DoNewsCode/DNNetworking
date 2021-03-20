@@ -36,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 下载文件名
 @property (nonatomic, copy, nullable) NSString *fileName;
 
+- (void)uploadingWithProgress:(NSProgress *)progress;
+
 @end
 
 NS_ASSUME_NONNULL_END
